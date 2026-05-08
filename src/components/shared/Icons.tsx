@@ -179,7 +179,7 @@ export const IconShield = ({ size = 48, className = "" }: IconProps) => (
       </linearGradient>
     </defs>
     <path d="M24 4 L42 10 L42 24 C42 34 34 42 24 44 C14 42 6 34 6 24 L6 10 z" fill="url(#shieldGrad)"/>
-    <path d="M16 24 L22 30 L32 18" stroke="white" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+    <path className="shield-check" d="M16 24 L22 30 L32 18" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 
