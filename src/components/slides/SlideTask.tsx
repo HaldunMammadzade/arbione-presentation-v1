@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { IconTask, IconCheck, IconClock } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
+import InteractiveTiltCard from "../shared/InteractiveTiltCard";
 
 export default function SlideTask() {
   const { t } = useLocale();
@@ -41,10 +42,11 @@ export default function SlideTask() {
           </div>
         </div>
 
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="relative">
-          <motion.div animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40" style={{ background: "linear-gradient(135deg, #f59e0b, #a78bfa)" }}/>
+        <InteractiveTiltCard delay={0.4} glowColor="rgba(245, 158, 11, 0.45)">
+          <div className="relative">
+            <motion.div animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40 pointer-events-none" style={{ background: "linear-gradient(135deg, #f59e0b, #a78bfa)" }}/>
 
-          <div className="relative glass-strong rounded-3xl p-6 overflow-hidden">
+            <div className="relative glass-strong rounded-3xl p-6 overflow-hidden">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-3">
                 <motion.div animate={{ rotate: 360 }} transition={{ duration: 10, repeat: Infinity, ease: "linear" }} className="w-12 h-12 rounded-2xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center" style={{ boxShadow: "0 8px 20px rgba(245,158,11,0.4)" }}>
@@ -119,8 +121,9 @@ export default function SlideTask() {
               ))}
             </div>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </InteractiveTiltCard>
     </div>
+  </div>
   );
 }

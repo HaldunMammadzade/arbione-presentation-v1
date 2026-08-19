@@ -75,26 +75,37 @@ export default function SlideMoreThan() {
                 style={{ ...pos, transformStyle: "preserve-3d" }}
               >
                 <div className={`relative w-full h-full rounded-3xl bg-gradient-to-br ${gradient} p-5 overflow-hidden`} style={{ boxShadow: "0 30px 60px rgba(99,102,241,0.4), inset 0 1px 0 rgba(255,255,255,0.2)" }}>
-                  <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, delay: delay + 1, ease: "linear" }} className="absolute inset-0" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent)" }}/>
-                  
+                  {/* Continuous shimmer */}
+                  <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 2.5, repeat: Infinity, delay: delay + 0.5, ease: "linear" }} className="absolute inset-0" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }}/>
+
                   <div className="flex items-center justify-between mb-4 relative">
                     <div className="text-white/90 text-xs font-semibold tracking-wider uppercase">{t.badges.module}</div>
-                    <div className="w-2 h-2 rounded-full bg-white/60 animate-pulse"/>
+                    <motion.div animate={{ scale: [1, 1.5, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-2 h-2 rounded-full bg-white/60"/>
                   </div>
 
                   {type === "chart" && (
                     <div className="relative">
                       <div className="text-white text-3xl font-black mb-3">Analytics</div>
                       <svg viewBox="0 0 180 80" className="w-full">
-                        <motion.path d="M 0 60 L 30 50 L 60 55 L 90 35 L 120 40 L 150 20 L 180 15" stroke="white" strokeWidth="2" fill="none" initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: delay + 0.5, duration: 2 }}/>
+                        <defs>
+                          <linearGradient id={`chartFill${i}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" stopColor="rgba(255,255,255,0.3)"/>
+                            <stop offset="100%" stopColor="rgba(255,255,255,0)"/>
+                          </linearGradient>
+                        </defs>
+                        <motion.path d="M 0 60 L 30 50 L 60 55 L 90 35 L 120 40 L 150 20 L 180 15 L 180 80 L 0 80 Z" fill={`url(#chartFill${i})`} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: delay + 1, duration: 1 }}/>
+                        <motion.path d="M 0 60 L 30 50 L 60 55 L 90 35 L 120 40 L 150 20 L 180 15" stroke="white" strokeWidth="2.5" fill="none" style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.8))" }} initial={{ pathLength: 0 }} animate={{ pathLength: 1 }} transition={{ delay: delay + 0.5, duration: 2 }}/>
                       </svg>
                     </div>
                   )}
                   {type === "metric" && (
                     <div className="relative">
                       <div className="text-white text-3xl font-black mb-3">Revenue</div>
-                      <div className="text-white text-4xl font-black">124K</div>
-                      <div className="text-white text-sm font-bold mt-2">+23%</div>
+                      <div className="text-white text-4xl font-black" style={{ textShadow: "0 0 20px rgba(255,255,255,0.5)" }}>124K</div>
+                      <div className="text-white/80 text-sm font-bold mt-2 flex items-center gap-1">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><polyline points="18 15 12 9 6 15"/></svg>
+                        +23%
+                      </div>
                     </div>
                   )}
                   {type === "progress" && (
@@ -103,8 +114,8 @@ export default function SlideMoreThan() {
                       <div className="space-y-3">
                         {[80, 55, 30].map((p, j) => (
                           <div key={j}>
-                            <div className="h-1.5 rounded-full bg-white/20 overflow-hidden">
-                              <motion.div initial={{ width: 0 }} animate={{ width: `${p}%` }} transition={{ delay: delay + 0.5 + j * 0.2, duration: 1 }} className="h-full bg-white"/>
+                            <div className="h-2 rounded-full bg-white/20 overflow-hidden">
+                              <motion.div initial={{ width: 0 }} animate={{ width: `${p}%` }} transition={{ delay: delay + 0.5 + j * 0.2, duration: 1 }} className="h-full bg-white rounded-full" style={{ boxShadow: "0 0 8px rgba(255,255,255,0.8)" }}/>
                             </div>
                           </div>
                         ))}
@@ -115,7 +126,8 @@ export default function SlideMoreThan() {
                     <div className="relative flex flex-col items-center">
                       <div className="text-white text-3xl font-black mb-2">Split</div>
                       <svg viewBox="0 0 100 100" className="w-32 h-32">
-                        <motion.circle cx="50" cy="50" r="38" fill="none" stroke="white" strokeWidth="14" strokeDasharray="120 240" initial={{ strokeDashoffset: 240 }} animate={{ strokeDashoffset: 120 }} transition={{ delay: delay + 0.5, duration: 1.5 }} transform="rotate(-90 50 50)" strokeLinecap="round"/>
+                        <motion.circle cx="50" cy="50" r="38" fill="none" stroke="rgba(255,255,255,0.2)" strokeWidth="14" strokeDasharray="240 240"/>
+                        <motion.circle cx="50" cy="50" r="38" fill="none" stroke="white" strokeWidth="14" strokeDasharray="120 240" initial={{ strokeDashoffset: 240 }} animate={{ strokeDashoffset: 120 }} transition={{ delay: delay + 0.5, duration: 1.5 }} transform="rotate(-90 50 50)" strokeLinecap="round" style={{ filter: "drop-shadow(0 0 6px rgba(255,255,255,0.8))" }}/>
                       </svg>
                     </div>
                   )}

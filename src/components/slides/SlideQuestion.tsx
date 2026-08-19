@@ -1,7 +1,21 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useTransform, animate } from "framer-motion";
+import { useEffect } from "react";
 import { IconCheck, IconLightning } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
+
+function AnimCounter({ to, prefix = "", suffix = "", decimals = 0, delay = 0 }: {
+  to: number; prefix?: string; suffix?: string; decimals?: number; delay?: number;
+}) {
+  const count = useMotionValue(0);
+  const formatted = useTransform(count, (v: number) =>
+    prefix + (decimals > 0 ? v.toFixed(decimals) : Math.round(v).toString()) + suffix
+  );
+  useEffect(() => {
+    animate(count, to, { duration: 2, delay, ease: [0.25, 1, 0.5, 1] });
+  }, [to, delay, count]);
+  return <motion.span>{formatted}</motion.span>;
+}
 
 export default function SlideQuestion() {
   const { t } = useLocale();
@@ -30,23 +44,36 @@ export default function SlideQuestion() {
           </motion.p>
 
           <div className="space-y-4 max-w-2xl">
-            {t.slide4.stats.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ x: -40, opacity: 0 }}
-                animate={{ x: 0, opacity: 1 }}
-                transition={{ delay: 1.1 + i * 0.2, duration: 0.7 }}
-                whileHover={{ x: 8, scale: 1.01 }}
-                className="flex items-start gap-4 p-5 rounded-2xl bg-white/80 backdrop-blur-md border border-primary/10 group hover:border-primary/30 transition-colors"
-                style={{ boxShadow: "0 10px 30px rgba(99,102,241,0.06)" }}
-              >
-                <div className="flex-shrink-0 mt-0.5"><IconCheck size={28}/></div>
-                <p className="text-slate-700 text-base leading-relaxed">
-                  {item.prefix}{" "}<span className="font-black text-xl gradient-text">{item.highlight}</span>{" "}{item.suffix}
-                  {("source" in item) && item.source && <span className="text-slate-400 text-sm italic ml-2">({item.source})</span>}
-                </p>
-              </motion.div>
-            ))}
+            {t.slide4.stats.map((item, i) => {
+              // Parse numeric value and suffix from highlight string like "23%", "+34%"
+              const raw = item.highlight;
+              const hasPlus = raw.startsWith("+");
+              const numStr = raw.replace(/[^0-9.]/g, "");
+              const numVal = parseFloat(numStr);
+              const suffix = raw.replace(/[+0-9.]/g, "");
+              return (
+                <motion.div
+                  key={i}
+                  initial={{ x: -40, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 1.1 + i * 0.2, duration: 0.7 }}
+                  whileHover={{ x: 8, scale: 1.01 }}
+                  className="flex items-start gap-4 p-5 rounded-2xl bg-white/80 backdrop-blur-md border border-primary/10 group hover:border-primary/30 transition-colors"
+                  style={{ boxShadow: "0 10px 30px rgba(99,102,241,0.06)" }}
+                >
+                  <div className="flex-shrink-0 mt-0.5"><IconCheck size={28}/></div>
+                  <p className="text-slate-700 text-base leading-relaxed">
+                    {item.prefix}{" "}
+                    <span className="font-black text-xl gradient-text">
+                      {hasPlus && "+"}<AnimCounter to={numVal} suffix={suffix} delay={1.3 + i * 0.2}/>
+                    </span>
+                    {" "}{item.suffix}
+                    {("source" in item) && item.source && <span className="text-slate-400 text-sm italic ml-2">({item.source})</span>}
+                  </p>
+                </motion.div>
+              );
+            })}
+
 
             <motion.div
               initial={{ x: -40, opacity: 0, scale: 0.95 }}

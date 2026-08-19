@@ -2,6 +2,7 @@
 import { motion } from "framer-motion";
 import { IconUsers, IconCheck } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
+import InteractiveTiltCard from "../shared/InteractiveTiltCard";
 
 export default function SlideHR() {
   const { t, locale } = useLocale();
@@ -46,10 +47,11 @@ export default function SlideHR() {
           </div>
         </div>
 
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="relative">
-          <motion.div animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40" style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa)" }}/>
+        <InteractiveTiltCard delay={0.4} glowColor="rgba(99, 102, 241, 0.45)">
+          <div className="relative">
+            <motion.div animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40 pointer-events-none" style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa)" }}/>
 
-          <div className="relative glass-strong rounded-3xl p-6 overflow-hidden">
+            <div className="relative glass-strong rounded-3xl p-6 overflow-hidden">
             <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
               <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center" style={{ boxShadow: "0 8px 20px rgba(99,102,241,0.4)" }}>
                 <IconUsers size={28}/>
@@ -114,8 +116,9 @@ export default function SlideHR() {
               ))}
             </div>
           </div>
-        </motion.div>
-      </div>
+        </div>
+      </InteractiveTiltCard>
     </div>
+  </div>
   );
 }
