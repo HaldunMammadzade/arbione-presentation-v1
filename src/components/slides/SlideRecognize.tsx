@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { IconUsers, IconChart, IconClock, IconWarning, IconSparkle } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -8,23 +8,23 @@ export default function SlideRecognize() {
   const icons = [<IconUsers size={32} key="u"/>, <IconClock size={32} key="c"/>, <IconChart size={32} key="ch"/>];
 
   return (
-    <div className="relative w-full h-full flex items-center p-20 overflow-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
+    <div className="relative w-full h-full flex items-center p-6 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#fb923c", top: "-15%", right: "-10%", opacity: 0.1 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#a78bfa", bottom: "-15%", left: "-10%", opacity: 0.15, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-16 items-center py-6 lg:py-0 pb-28 sm:pb-20 lg:pb-0">
         <div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20 mb-6">
             <IconWarning size={16}/>
             <span className="text-orange-600 text-xs tracking-wider uppercase font-semibold">{t.badges.familiar}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[4rem] font-black text-slate-900 leading-[1.05] mb-10 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-3xl sm:text-4xl lg:text-[4rem] font-black text-slate-900 leading-[1.05] mb-6 sm:mb-10 tracking-[-0.03em]">
             {t.slide10.titlePart1} <br/><span className="gradient-text-premium">{t.slide10.titlePart2}</span>
           </motion.h2>
 
-          <div className="space-y-4 mb-10">
+          <div className="space-y-3 sm:space-y-4 mb-6 sm:mb-10">
             {t.slide10.scenarios.map((s, i) => (
               <motion.div
                 key={i}
@@ -32,11 +32,11 @@ export default function SlideRecognize() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.3 + i * 0.15, duration: 0.6 }}
                 whileHover={{ x: 10, scale: 1.02 }}
-                className="flex items-center gap-5 p-5 rounded-2xl bg-white border border-primary/10 cursor-default group hover:border-primary/30 transition-colors"
+                className="flex items-center gap-4 sm:gap-5 p-4 sm:p-5 rounded-2xl bg-white border border-primary/10 cursor-default group hover:border-primary/30 transition-colors"
                 style={{ boxShadow: "0 8px 24px rgba(99,102,241,0.06)" }}
               >
                 <motion.div whileHover={{ rotate: 10 }}>{icons[i]}</motion.div>
-                <p className="text-slate-700 text-lg font-medium flex-1">{s}</p>
+                <p className="text-slate-700 text-sm sm:text-lg font-medium flex-1">{s}</p>
                 <motion.div initial={{ opacity: 0 }} whileHover={{ opacity: 1 }} className="text-primary">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14m-7-7l7 7-7 7"/></svg>
                 </motion.div>
@@ -44,18 +44,18 @@ export default function SlideRecognize() {
             ))}
           </div>
 
-          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 1, duration: 0.8 }} className="relative p-6 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa)" }}>
+          <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 1, duration: 0.8 }} className="relative p-5 sm:p-6 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa)" }}>
             <motion.div animate={{ x: ["-100%", "200%"] }} transition={{ duration: 3, repeat: Infinity, ease: "linear" }} className="absolute inset-0" style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent)" }}/>
             <div className="relative flex items-start gap-3">
               <IconSparkle size={24} className="text-white flex-shrink-0 mt-1"/>
-              <p className="text-xl font-medium leading-relaxed text-white">
+              <p className="text-base sm:text-xl font-medium leading-relaxed text-white">
                 <span className="font-extrabold">Arbione</span> {t.slide10.callout.prefix} <span className="font-bold underline decoration-white/50">{t.slide10.callout.highlight}</span>
               </p>
             </div>
           </motion.div>
         </div>
 
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="relative h-[550px]">
+        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5, duration: 1 }} className="relative h-[550px] hidden lg:block">
           {[
             { top: "3%", left: "12%", rotate: -8, type: "chart", delay: 0.6, color: "from-blue-400 to-indigo-500" },
             { top: "5%", right: "8%", rotate: 10, type: "docs", delay: 0.8, color: "from-purple-400 to-pink-500" },

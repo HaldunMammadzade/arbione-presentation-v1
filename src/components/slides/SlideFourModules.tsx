@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useState, useCallback } from "react";
 import { IconUsers, IconLocation, IconTask, IconChart, IconSparkle } from "../shared/Icons";
@@ -77,7 +77,7 @@ export default function SlideFourModules() {
 
   return (
     <div
-      className="relative w-full h-full flex flex-col items-center justify-center p-16 overflow-hidden noise-overlay"
+      className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 lg:p-10 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay"
       style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}
     >
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
@@ -88,7 +88,7 @@ export default function SlideFourModules() {
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 0.6 }}
-        className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-8"
+        className="relative z-10 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary/10 border border-primary/20 mb-1 sm:mb-4"
       >
         <IconSparkle size={14} className="text-primary"/>
         <span className="text-primary text-xs tracking-wider uppercase font-semibold">{t.badges.theResult}</span>
@@ -98,7 +98,7 @@ export default function SlideFourModules() {
         initial={{ y: -40, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, delay: 0.1 }}
-        className="relative z-10 text-[5rem] font-black text-slate-900 text-center mb-6 tracking-[-0.04em] leading-none flex items-baseline gap-8 justify-center flex-wrap"
+        className="relative z-10 text-2xl sm:text-4xl lg:text-[3.8rem] font-black text-slate-900 text-center mb-2 sm:mb-4 tracking-[-0.04em] leading-none flex items-baseline gap-3 sm:gap-6 justify-center flex-wrap"
       >
         <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.3, duration: 0.7, ease: "backOut" }}>
           <span className="gradient-text-premium">4</span><span className="text-slate-900"> {t.slide16.title1}</span>
@@ -115,16 +115,16 @@ export default function SlideFourModules() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.8 }}
-        className="relative z-10 text-lg text-slate-600 text-center max-w-3xl mb-12 leading-relaxed"
+        className="relative z-10 text-xs sm:text-base text-slate-600 text-center max-w-3xl mb-2 sm:mb-8 leading-relaxed"
       >
         {t.slide16.desc} <span className="text-slate-900 font-semibold">{t.slide16.descBold}</span>
       </motion.p>
 
-      <div className="relative z-10 max-w-5xl w-full grid grid-cols-2 gap-4">
+      <div className="relative z-10 max-w-5xl w-full grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-3.5 py-0 sm:py-0 pb-16 sm:pb-20 lg:pb-0">
         {t.slide16.modules.map((m, i) => (
           <TiltCard key={i} delay={1.3 + i * 0.15}>
             <div
-              className="group relative bg-white rounded-2xl p-6 overflow-hidden h-full"
+              className="group relative bg-white rounded-2xl p-3 sm:p-5 overflow-hidden h-full"
               style={{ boxShadow: `0 10px 30px rgba(99,102,241,0.08)` }}
             >
               {/* Gradient overlay on hover */}
@@ -152,7 +152,7 @@ export default function SlideFourModules() {
                 style={{ background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.25), transparent)" }}
               />
 
-              <div className="relative flex items-center gap-6">
+              <div className="relative flex items-center gap-3 sm:gap-6">
                 <motion.div
                   animate={{ y: [0, -6, 0], rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: i * 0.3 }}
@@ -162,10 +162,10 @@ export default function SlideFourModules() {
                   {moduleIcons[i]}
                 </motion.div>
                 <div className="flex-1">
-                  <div className={`text-4xl font-black bg-gradient-to-r ${gradients[i]} bg-clip-text text-transparent mb-1 tracking-tight`}>
+                  <div className={`text-2xl sm:text-3xl font-black bg-gradient-to-r ${gradients[i]} bg-clip-text text-transparent mb-1 tracking-tight`}>
                     {m.name}
                   </div>
-                  <div className="text-slate-700 font-medium">{m.desc}</div>
+                  <div className="text-slate-700 text-xs sm:text-sm font-medium">{m.desc}</div>
                 </div>
               </div>
             </div>

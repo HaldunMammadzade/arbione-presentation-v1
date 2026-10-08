@@ -1,6 +1,6 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
 import SlideGridOverview from "./SlideGridOverview";
 
@@ -20,6 +20,7 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
   const [hoveredDot, setHoveredDot] = useState<number | null>(null);
   const [isGridOpen, setIsGridOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const dotsStripRef = useRef<HTMLDivElement>(null);
 
   // Fullscreen change listener & 'G' shortcut listener
   useEffect(() => {
@@ -64,25 +65,25 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
         totalSlides={total}
       />
 
-      {/* Top Progress Bar */}
-      <div className="fixed top-0 left-0 right-0 z-50 h-1" style={{ background: "rgba(0,0,0,0.1)" }}>
+      {/* Top Progress Bar — thicker for visibility on MacBook */}
+      <div className="fixed top-0 left-0 right-0 z-[60] h-1.5" style={{ background: "rgba(0,0,0,0.15)" }}>
         <motion.div
           className="h-full origin-left"
           style={{
             background: isLight
               ? "linear-gradient(90deg, #6366f1, #a78bfa, #22d3ee)"
               : "linear-gradient(90deg, #818cf8, #c084fc, #22d3ee)",
-            boxShadow: "0 0 12px rgba(129,140,248,0.8), 0 0 4px rgba(34,211,238,0.6)",
+            boxShadow: "0 0 16px rgba(129,140,248,0.9), 0 0 6px rgba(34,211,238,0.7)",
           }}
           animate={{ scaleX: progress / 100 }}
           transition={{ duration: 0.5, ease: [0.25, 1, 0.5, 1] }}
         />
         {/* Glow tip */}
         <motion.div
-          className="absolute top-0 h-1 w-8 rounded-full"
+          className="absolute top-0 h-1.5 w-8 rounded-full"
           style={{
-            background: "rgba(255,255,255,0.9)",
-            boxShadow: "0 0 16px 4px rgba(129,140,248,1)",
+            background: "rgba(255,255,255,0.95)",
+            boxShadow: "0 0 20px 6px rgba(129,140,248,1)",
             filter: "blur(1px)",
             left: `calc(${progress}% - 16px)`,
           }}
@@ -91,8 +92,8 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
         />
       </div>
 
-      {/* Slide counter — top left */}
-      <div className="fixed top-4 left-6 z-50 flex items-center gap-3 pointer-events-none">
+      {/* Slide counter — top left — hidden on xs mobile to save space */}
+      <div className="fixed top-5 left-5 sm:top-5 sm:left-6 z-50 hidden sm:flex items-center gap-2 sm:gap-3 pointer-events-none">
         <AnimatePresence mode="wait">
           <motion.div
             key={current}
@@ -151,8 +152,9 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5, duration: 0.6 }}
-        className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-3 px-5 py-2.5 rounded-full backdrop-blur-xl"
+        className="fixed bottom-4 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 sm:gap-3 px-2.5 sm:px-5 py-1.5 sm:py-2.5 rounded-full backdrop-blur-xl"
         style={{
+          paddingBottom: `max(6px, calc(env(safe-area-inset-bottom, 0px) + 6px))`,
           background: isLight ? "rgba(255,255,255,0.92)" : "rgba(10,11,30,0.85)",
           border: isLight ? "1px solid rgba(99,102,241,0.15)" : "1px solid rgba(255,255,255,0.1)",
           boxShadow: isLight
@@ -161,39 +163,27 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
         }}
       >
         {/* Grid Overview Toggle Button */}
-        <div className="relative flex items-center justify-center group">
-          <motion.button
-            onClick={() => setIsGridOpen(true)}
-            whileHover={{ scale: 1.15 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-8 h-8 rounded-full flex items-center justify-center transition-all relative"
-            style={{
-              background: isLight ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)",
-              color: isLight ? "#4f46e5" : "white",
-            }}
-          >
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-              <rect x="3" y="3" width="7" height="7" rx="1.5" />
-              <rect x="14" y="3" width="7" height="7" rx="1.5" />
-              <rect x="14" y="14" width="7" height="7" rx="1.5" />
-              <rect x="3" y="14" width="7" height="7" rx="1.5" />
-            </svg>
-          </motion.button>
-          <div
-            className="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 rounded-lg text-[9px] font-bold uppercase tracking-wider whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none z-50"
-            style={{
-              background: isLight ? "#1e293b" : "rgba(255,255,255,0.95)",
-              color: isLight ? "white" : "#1e293b",
-              boxShadow: "0 4px 12px rgba(0,0,0,0.25)",
-            }}
-          >
-            {t.nav.gallery}
-          </div>
-        </div>
+        <motion.button
+          onClick={() => setIsGridOpen(true)}
+          whileHover={{ scale: 1.15 }}
+          whileTap={{ scale: 0.9 }}
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all flex-shrink-0"
+          style={{
+            background: isLight ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)",
+            color: isLight ? "#4f46e5" : "white",
+          }}
+        >
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+            <rect x="3" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="3" width="7" height="7" rx="1.5" />
+            <rect x="14" y="14" width="7" height="7" rx="1.5" />
+            <rect x="3" y="14" width="7" height="7" rx="1.5" />
+          </svg>
+        </motion.button>
 
-        {/* Divider */}
+        {/* Divider — hidden on mobile */}
         <div
-          className="w-[1px] h-4"
+          className="hidden sm:block w-[1px] h-4 flex-shrink-0"
           style={{ background: isLight ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.15)" }}
         />
 
@@ -203,47 +193,34 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
           disabled={current === 0}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
-          className="w-8 h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group"
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group flex-shrink-0"
           style={{
             background: isLight ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)",
             color: isLight ? "#4f46e5" : "white",
           }}
         >
-          <motion.div
-            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-            style={{
-              background: isLight
-                ? "radial-gradient(circle, rgba(99,102,241,0.25), transparent)"
-                : "radial-gradient(circle, rgba(129,140,248,0.35), transparent)",
-              boxShadow: isLight
-                ? "0 0 16px rgba(99,102,241,0.5)"
-                : "0 0 16px rgba(129,140,248,0.6)",
-            }}
-          />
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10">
             <polyline points="15 18 9 12 15 6"/>
           </svg>
         </motion.button>
 
         {/* Dot indicators with tooltips */}
-        <div className="flex gap-1.5 items-center max-w-[260px] overflow-x-auto" style={{ scrollbarWidth: "none" }}>
+        <div ref={dotsStripRef} className="flex gap-[3px] sm:gap-1.5 items-center max-w-[90px] sm:max-w-[260px] overflow-x-auto" style={{ scrollbarWidth: "none" }}>
           {Array.from({ length: total }).map((_, i) => (
             <div
               key={i}
               ref={current === i ? (el) => {
-                if (el) {
-                  el.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                    inline: "center"
-                  });
+                const strip = dotsStripRef.current;
+                if (el && strip) {
+                  const left = el.offsetLeft - (strip.clientWidth - el.offsetWidth) / 2;
+                  strip.scrollTo({ left: Math.max(0, left), behavior: "smooth" });
                 }
               } : null}
               className="relative flex items-center justify-center flex-shrink-0"
               onMouseEnter={() => setHoveredDot(i)}
               onMouseLeave={() => setHoveredDot(null)}
             >
-              {/* Tooltip */}
+              {/* Tooltip — desktop only */}
               <AnimatePresence>
                 {hoveredDot === i && (
                   <motion.div
@@ -251,7 +228,7 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 4, scale: 0.85 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 rounded-lg text-[9px] font-semibold tracking-wider uppercase whitespace-nowrap pointer-events-none z-50"
+                    className="absolute -top-9 left-1/2 -translate-x-1/2 px-2 py-1 rounded-lg text-[9px] font-semibold tracking-wider uppercase whitespace-nowrap pointer-events-none z-50 hidden sm:block"
                     style={{
                       background: isLight ? "#1e293b" : "rgba(255,255,255,0.95)",
                       color: isLight ? "white" : "#1e293b",
@@ -266,6 +243,22 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
               <motion.button
                 onClick={() => onGoTo(i)}
                 animate={{
+                  width: current === i ? [14, 20] : [5, 5],
+                  height: [5, 5],
+                  background: current === i
+                    ? "linear-gradient(90deg, #818cf8, #c084fc)"
+                    : isLight
+                    ? "rgba(99,102,241,0.25)"
+                    : "rgba(255,255,255,0.3)",
+                  boxShadow: current === i ? "0 0 8px rgba(129,140,248,0.7)" : "none",
+                }}
+                transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
+                className="rounded-full sm:hidden"
+                whileHover={{ scale: 1.3 }}
+              />
+              <motion.button
+                onClick={() => onGoTo(i)}
+                animate={{
                   width: current === i ? 28 : 7,
                   height: 7,
                   background: current === i
@@ -273,12 +266,10 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
                     : isLight
                     ? "rgba(99,102,241,0.25)"
                     : "rgba(255,255,255,0.3)",
-                  boxShadow: current === i
-                    ? "0 0 10px rgba(129,140,248,0.7)"
-                    : "none",
+                  boxShadow: current === i ? "0 0 10px rgba(129,140,248,0.7)" : "none",
                 }}
                 transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-                className="rounded-full"
+                className="rounded-full hidden sm:block"
                 whileHover={{ scale: 1.3 }}
               />
             </div>
@@ -291,36 +282,25 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
           disabled={current === total - 1}
           whileHover={{ scale: 1.15 }}
           whileTap={{ scale: 0.9 }}
-          className="w-8 h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group"
+          className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center transition-all disabled:opacity-30 disabled:cursor-not-allowed relative overflow-hidden group flex-shrink-0"
           style={{
             background: isLight ? "rgba(99,102,241,0.1)" : "rgba(255,255,255,0.1)",
             color: isLight ? "#4f46e5" : "white",
           }}
         >
-          <motion.div
-            className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-            style={{
-              background: isLight
-                ? "radial-gradient(circle, rgba(99,102,241,0.25), transparent)"
-                : "radial-gradient(circle, rgba(129,140,248,0.35), transparent)",
-              boxShadow: isLight
-                ? "0 0 16px rgba(99,102,241,0.5)"
-                : "0 0 16px rgba(129,140,248,0.6)",
-            }}
-          />
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" className="relative z-10">
             <polyline points="9 18 15 12 9 6"/>
           </svg>
         </motion.button>
 
-        {/* Divider */}
+        {/* Divider — hidden on mobile */}
         <div
-          className="w-[1px] h-4"
+          className="hidden sm:block w-[1px] h-4 flex-shrink-0"
           style={{ background: isLight ? "rgba(99,102,241,0.2)" : "rgba(255,255,255,0.15)" }}
         />
 
-        {/* Fullscreen Button */}
-        <div className="relative flex items-center justify-center group">
+        {/* Fullscreen Button — hidden on mobile */}
+        <div className="relative hidden sm:flex items-center justify-center group">
           <motion.button
             onClick={toggleFullscreen}
             whileHover={{ scale: 1.15 }}
@@ -353,8 +333,8 @@ export default function Navigation({ current, total, onPrev, onNext, onGoTo, the
           </div>
         </div>
 
-        {/* PDF Export Button */}
-        <div className="relative flex items-center justify-center group">
+        {/* PDF Export Button — hidden on mobile */}
+        <div className="relative hidden sm:flex items-center justify-center group">
           <motion.button
             onClick={() => window.open("/print", "_blank")}
             whileHover={{ scale: 1.12 }}

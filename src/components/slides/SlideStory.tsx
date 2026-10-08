@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { IconSparkle, ArbioneLogo } from "../shared/Icons";
@@ -330,7 +330,7 @@ export default function SlideStory() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-16 overflow-hidden" style={{ background: "#0a0b1e" }}>
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 lg:p-12 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#0a0b1e" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="absolute inset-0 grid-bg opacity-40"/>
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-20%", left: "-20%", opacity: 0.3 }}/>
@@ -340,25 +340,25 @@ export default function SlideStory() {
         <motion.div key={i} className="absolute w-1 h-1 bg-white rounded-full" style={{ left: `${Math.random()*100}%`, top: `${Math.random()*100}%` }} animate={{ opacity: [0.1, 0.8, 0.1], scale: [1, 1.5, 1] }} transition={{ duration: 3 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 3 }}/>
       ))}
 
-      <motion.div initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }} className="relative z-10 text-center mb-10">
-        <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+      <motion.div initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.8 }} className="relative z-10 text-center mb-2 sm:mb-6">
+        <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass mb-1 sm:mb-4">
           <IconSparkle size={14} className="text-accent"/>
           <span className="text-white/80 text-xs tracking-[0.3em] uppercase font-semibold">{t.badges.ourStory}</span>
         </motion.div>
         
-        <h2 className="text-5xl font-black text-white mb-3 tracking-[-0.02em] leading-tight">
+        <h2 className="text-xl sm:text-3xl lg:text-4xl font-black text-white mb-1 sm:mb-2 tracking-[-0.02em] leading-tight">
           {t.slide7.titlePart1}
         </h2>
-        <p className="text-3xl gradient-text-premium font-bold">
+        <p className="text-base sm:text-2xl gradient-text-premium font-bold">
           {t.slide7.titlePart2}
         </p>
       </motion.div>
 
-      <div className="relative z-10 max-w-6xl grid grid-cols-[1fr_1.1fr] gap-16 items-center">
-        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="space-y-5 text-white/85 text-lg leading-relaxed">
+      <div className="relative z-10 max-w-6xl w-full grid grid-cols-1 lg:grid-cols-[1fr_1.1fr] gap-4 sm:gap-8 lg:gap-16 items-center py-1 sm:py-4 lg:py-0 pb-14 sm:pb-20 lg:pb-0">
+        <motion.div initial={{ x: -40, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="space-y-2 sm:space-y-5 text-white/85 text-sm sm:text-lg leading-relaxed">
           <p>{t.slide7.p1Prefix} <span className="gradient-text-premium font-semibold">Arbione</span>{t.slide7.p1Suffix}</p>
           <p>{t.slide7.p2}</p>
-          <div className="relative p-5 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.15), rgba(167,139,250,0.1))", border: "1px solid rgba(167,139,250,0.2)" }}>
+          <div className="relative p-3 sm:p-5 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.15), rgba(167,139,250,0.1))", border: "1px solid rgba(167,139,250,0.2)" }}>
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-accent to-primary"/>
             <p className="italic text-white/90">{t.slide7.p3}</p>
           </div>
@@ -371,7 +371,7 @@ export default function SlideStory() {
             className="absolute -inset-4 rounded-3xl blur-3xl opacity-30 pointer-events-none"
             style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa, #22d3ee)" }}
           />
-          <div className="relative rounded-2xl overflow-hidden" style={{ height: "420px" }}>
+          <div className="relative rounded-2xl overflow-hidden" style={{ height: "clamp(260px, 45vw, 420px)" }}>
             <FakeEmployeePortalUI />
           </div>
         </InteractiveTiltCard>

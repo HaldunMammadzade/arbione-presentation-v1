@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
 import { IconSparkle } from "../shared/Icons";
@@ -25,28 +25,28 @@ export default function SlideBenefits() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex flex-col items-center justify-center p-16 overflow-hidden" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex flex-col items-center justify-center p-4 sm:p-8 lg:p-12 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="absolute inset-0 grid-bg opacity-50"/>
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-20%", left: "-15%", opacity: 0.25 }}/>
-      <div className="aurora-blob" style={{ width: 500, height: 500, background: "#22d3ee", bottom: "-15%", right: "-15%", opacity: 0.2, animationDelay: "-10s" }}/>
+      <div className="aurora-blob hidden sm:block" style={{ width: 500, height: 500, background: "#22d3ee", bottom: "-15%", right: "-15%", opacity: 0.2, animationDelay: "-10s" }}/>
 
-      <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10 inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+      <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10 inline-flex items-center gap-2 px-3.5 py-1 rounded-full glass mb-1 sm:mb-4">
         <IconSparkle size={14} className="text-accent"/>
         <span className="text-white/80 text-xs tracking-[0.3em] uppercase font-semibold">{t.badges.benefits}</span>
       </motion.div>
 
-      <motion.h2 initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="relative z-10 text-[4rem] font-black text-white text-center mb-3 tracking-[-0.03em] leading-tight">
+      <motion.h2 initial={{ y: -40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="relative z-10 text-2xl sm:text-4xl lg:text-[3.5rem] font-black text-white text-center mb-1 sm:mb-2 tracking-[-0.03em] leading-tight">
         {t.slideBenefits.title}
       </motion.h2>
-      <motion.h3 initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15, duration: 0.9 }} className="relative z-10 text-2xl gradient-text-premium font-bold mb-5">
+      <motion.h3 initial={{ y: -30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.15, duration: 0.9 }} className="relative z-10 text-base sm:text-xl gradient-text-premium font-bold mb-1 sm:mb-3">
         {t.slideBenefits.subtitle}
       </motion.h3>
-      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="relative z-10 text-base text-white/70 max-w-3xl text-center mb-12 leading-relaxed">
+      <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="relative z-10 text-xs sm:text-sm text-white/70 max-w-3xl text-center mb-2 sm:mb-8 leading-relaxed">
         {t.slideBenefits.desc}
       </motion.p>
 
-      <div className="relative z-10 grid grid-cols-3 gap-5 max-w-5xl w-full">
+      <div className="relative z-10 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-2 sm:gap-4 max-w-5xl w-full py-2 lg:py-0 pb-16 sm:pb-20 lg:pb-0">
         {t.slideBenefits.items.map((item, i) => (
           <motion.div
             key={i}
@@ -62,17 +62,17 @@ export default function SlideBenefits() {
               className="absolute -inset-2 rounded-2xl blur-xl opacity-30"
               style={{ background: `linear-gradient(135deg, rgba(167,139,250,0.4), rgba(34,211,238,0.4))` }}
             />
-            <div className="relative glass-strong rounded-2xl p-5 overflow-hidden h-full">
+            <div className="relative glass-strong rounded-2xl p-3 overflow-hidden h-full">
               <div className={`absolute inset-0 bg-gradient-to-br ${benefitColors[i]} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}/>
               
-              <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, delay: i * 0.3 }} className={`w-14 h-14 rounded-xl bg-gradient-to-br ${benefitColors[i]} flex items-center justify-center text-white mb-3`} style={{ boxShadow: "0 6px 16px rgba(99,102,241,0.3)" }}>
+              <motion.div animate={{ rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, delay: i * 0.3 }} className={`w-10 h-10 rounded-xl bg-gradient-to-br ${benefitColors[i]} flex items-center justify-center text-white mb-2`} style={{ boxShadow: "0 6px 16px rgba(99,102,241,0.3)" }}>
                 {benefitIcons[i]}
               </motion.div>
               
-              <div className={`text-lg font-bold bg-gradient-to-r ${benefitColors[i]} bg-clip-text text-transparent mb-1`}>
+              <div className={`text-sm font-bold bg-gradient-to-r ${benefitColors[i]} bg-clip-text text-transparent mb-1`}>
                 {item.title}
               </div>
-              <div className="text-white/70 text-sm">{item.desc}</div>
+              <div className="text-white/70 text-xs">{item.desc}</div>
             </div>
           </motion.div>
         ))}

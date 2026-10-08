@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { IconCheck, IconLightning } from "../shared/Icons";
@@ -21,29 +21,29 @@ export default function SlideQuestion() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex items-center p-16 overflow-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
+    <div className="relative w-full h-full flex items-center p-4 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#a78bfa", top: "-20%", right: "10%", opacity: 0.12 }}/>
-      <div className="aurora-blob" style={{ width: 400, height: 400, background: "#6366f1", bottom: "-10%", left: "-5%", opacity: 0.12, animationDelay: "-10s" }}/>
+      <div className="aurora-blob hidden sm:block" style={{ width: 400, height: 400, background: "#6366f1", bottom: "-10%", left: "-5%", opacity: 0.12, animationDelay: "-10s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1.3fr_1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-4 lg:gap-16 items-center py-2 lg:py-0 pb-16 sm:pb-20 lg:pb-0">
         <div>
-          <motion.p initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.7 }} className="text-2xl text-slate-400 font-light mb-1 line-through decoration-2 decoration-slate-300">
+          <motion.p initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ duration: 0.7 }} className="text-sm sm:text-xl text-slate-400 font-light mb-1 line-through decoration-2 decoration-slate-300">
             {t.slide4.oldQuestionLabel}
           </motion.p>
-          <motion.p initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.7 }} className="text-3xl text-slate-400 italic pl-16 mb-10 line-through decoration-2 decoration-slate-300/60">
+          <motion.p initial={{ x: 50, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.7 }} className="text-sm sm:text-2xl text-slate-400 italic pl-4 sm:pl-12 mb-3 sm:mb-6 line-through decoration-2 decoration-slate-300/60">
             &ldquo;{t.slide4.oldQuestion}&rdquo;
           </motion.p>
 
-          <motion.p initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.7 }} className="text-3xl font-bold text-slate-900 mb-3 flex items-center gap-3">
-            <span className="w-10 h-0.5 bg-gradient-to-r from-primary to-accent"/>
+          <motion.p initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.7 }} className="text-sm sm:text-2xl font-bold text-slate-900 mb-1 sm:mb-2 flex items-center gap-2">
+            <span className="w-6 sm:w-10 h-0.5 bg-gradient-to-r from-primary to-accent"/>
             {t.slide4.newQuestionLabel}
           </motion.p>
-          <motion.p initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, duration: 1, ease: [0.34, 1.56, 0.64, 1] }} className="text-6xl font-black gradient-text-premium pl-16 mb-14 tracking-tight leading-tight">
+          <motion.p initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.8, duration: 1, ease: [0.34, 1.56, 0.64, 1] }} className="text-xl sm:text-4xl lg:text-5xl font-black gradient-text-premium pl-4 sm:pl-12 mb-4 sm:mb-8 tracking-tight leading-tight">
             &ldquo;{t.slide4.newQuestion}&rdquo;
           </motion.p>
 
-          <div className="space-y-4 max-w-2xl">
+          <div className="space-y-2 max-w-2xl">
             {t.slide4.stats.map((item, i) => {
               // Parse numeric value and suffix from highlight string like "23%", "+34%"
               const raw = item.highlight;
@@ -58,13 +58,13 @@ export default function SlideQuestion() {
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ delay: 1.1 + i * 0.2, duration: 0.7 }}
                   whileHover={{ x: 8, scale: 1.01 }}
-                  className="flex items-start gap-4 p-5 rounded-2xl bg-white/80 backdrop-blur-md border border-primary/10 group hover:border-primary/30 transition-colors"
+                  className="flex items-start gap-3 p-3 rounded-2xl bg-white/80 backdrop-blur-md border border-primary/10 group hover:border-primary/30 transition-colors"
                   style={{ boxShadow: "0 10px 30px rgba(99,102,241,0.06)" }}
                 >
                   <div className="flex-shrink-0 mt-0.5"><IconCheck size={28}/></div>
-                  <p className="text-slate-700 text-base leading-relaxed">
+                  <p className="text-slate-700 text-sm leading-snug">
                     {item.prefix}{" "}
-                    <span className="font-black text-xl gradient-text">
+                    <span className="font-black text-lg gradient-text">
                       {hasPlus && "+"}<AnimCounter to={numVal} suffix={suffix} delay={1.3 + i * 0.2}/>
                     </span>
                     {" "}{item.suffix}
@@ -79,18 +79,18 @@ export default function SlideQuestion() {
               initial={{ x: -40, opacity: 0, scale: 0.95 }}
               animate={{ x: 0, opacity: 1, scale: 1 }}
               transition={{ delay: 1.5, duration: 0.7 }}
-              className="relative flex items-start gap-4 p-6 rounded-2xl overflow-hidden"
+              className="relative flex items-start gap-3 p-4 rounded-2xl overflow-hidden"
               style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.12), rgba(167,139,250,0.12))", border: "1px solid rgba(99,102,241,0.25)" }}
             >
               <div className="flex-shrink-0"><IconLightning size={32}/></div>
-              <p className="text-slate-800 text-base leading-relaxed font-semibold">
+              <p className="text-slate-800 text-sm leading-snug font-semibold">
                 {t.slide4.callout.prefix} <span className="gradient-text">{t.slide4.callout.highlight}</span>
               </p>
             </motion.div>
           </div>
         </div>
 
-        <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.5, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative flex items-center justify-center">
+        <motion.div initial={{ scale: 0, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.5, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative hidden lg:flex items-center justify-center">
           <div className="relative w-[450px] h-[450px]">
             <motion.div animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30"/>
             <motion.div animate={{ rotate: -360 }} transition={{ duration: 30, repeat: Infinity, ease: "linear" }} className="absolute inset-10 rounded-full border-2 border-dashed border-accent/30"/>

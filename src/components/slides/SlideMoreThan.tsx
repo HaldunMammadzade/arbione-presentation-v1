@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { IconSparkle, IconLightning, IconTarget, IconClock } from "../shared/Icons";
@@ -17,46 +17,46 @@ export default function SlideMoreThan() {
   const gradients = ["from-amber-400 to-orange-500", "from-primary to-accent", "from-pink-400 to-purple-500"];
 
   return (
-    <div className="relative w-full h-full flex items-center p-16 overflow-hidden" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex items-center p-6 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="absolute inset-0 grid-bg opacity-40"/>
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-20%", right: "-15%", opacity: 0.3 }}/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#a78bfa", bottom: "-20%", left: "-15%", opacity: 0.25, animationDelay: "-10s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1fr_1fr] gap-8 lg:gap-16 items-center py-6 lg:py-0 pb-28 sm:pb-20 lg:pb-0">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-4 sm:mb-6">
             <IconSparkle size={14} className="text-accent"/>
             <span className="text-white/80 text-xs tracking-wider uppercase font-semibold">{t.badges.beyond}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[4.5rem] font-black leading-[1.05] mb-8 tracking-[-0.03em] gradient-text-premium">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-3xl sm:text-4xl lg:text-[4.5rem] font-black leading-[1.05] mb-4 sm:mb-8 tracking-[-0.03em] gradient-text-premium">
             {t.slide17.title1}<br/>{t.slide17.title2}
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-xl text-white/80 leading-relaxed mb-6">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-base sm:text-xl text-white/80 leading-relaxed mb-4 sm:mb-6">
             {t.slide17.descPrefix} <span className="gradient-text-premium font-semibold">{t.slide17.descHighlight}</span>
           </motion.p>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-white/70 text-base leading-relaxed mb-8">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="text-white/70 text-sm sm:text-base leading-relaxed mb-6 sm:mb-8">
             {t.slide17.desc2}
           </motion.p>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-3 gap-2.5 sm:gap-4 mb-6 lg:mb-0">
             {t.slide17.stats.map((s, i) => (
-              <motion.div key={i} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8 + i * 0.15 }} whileHover={{ y: -5, scale: 1.05 }} className="relative glass-strong rounded-2xl p-4 text-center overflow-hidden group cursor-default">
+              <motion.div key={i} initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8 + i * 0.15 }} whileHover={{ y: -5, scale: 1.05 }} className="relative glass-strong rounded-2xl p-3 sm:p-4 text-center overflow-hidden group cursor-default">
                 <div className={`absolute inset-0 bg-gradient-to-br ${gradients[i]} opacity-0 group-hover:opacity-20 transition-opacity`}/>
                 <div className="relative">
-                  <div className="flex justify-center mb-2">{icons[i]}</div>
-                  <div className="text-3xl font-black gradient-text-premium leading-none"><Counter target={s.value} suffix={s.suffix}/></div>
-                  <div className="text-white/60 text-xs mt-2 leading-tight">{s.label}</div>
+                  <div className="flex justify-center mb-1.5 sm:mb-2">{icons[i]}</div>
+                  <div className="text-2xl sm:text-3xl font-black gradient-text-premium leading-none"><Counter target={s.value} suffix={s.suffix}/></div>
+                  <div className="text-white/60 text-[10px] sm:text-xs mt-1.5 sm:mt-2 leading-tight">{s.label}</div>
                 </div>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="relative h-[550px]" style={{ perspective: 1500 }}>
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="relative h-[550px] hidden lg:block" style={{ perspective: 1500 }}>
           {[
             { rotate: -10, top: "3%", left: "5%", gradient: "from-primary to-accent", delay: 0.6, type: "chart" },
             { rotate: 8, top: "8%", right: "5%", gradient: "from-cyan-400 to-blue-500", delay: 0.8, type: "metric" },

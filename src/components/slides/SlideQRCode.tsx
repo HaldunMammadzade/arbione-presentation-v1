@@ -42,7 +42,7 @@ function QRPattern({ color = "#6366f1", id }: { color?: string; id: string }) {
 
 function StoreBadge({ type, label, sublabel }: { type: "apple" | "google"; label: string; sublabel: string }) {
   return (
-    <div className="flex items-center gap-3 px-5 py-3.5 rounded-2xl border border-white/20 backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.08)" }}>
+    <div className="flex items-center gap-2 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl border border-white/20 backdrop-blur-sm" style={{ background: "rgba(255,255,255,0.08)" }}>
       {type === "apple" ? (
         <svg width="28" height="28" viewBox="0 0 28 28" fill="white">
           <path d="M20.5 14.8c0-3.2 2.6-4.7 2.7-4.8-1.5-2.1-3.8-2.4-4.6-2.4-2-.2-3.8 1.2-4.8 1.2-1 0-2.5-1.1-4.2-1.1-2.1 0-4.1 1.2-5.2 3.1-2.2 3.9-.6 9.6 1.6 12.7 1.1 1.6 2.3 3.3 4 3.2 1.6-.1 2.2-1 4.1-1s2.5 1 4.2.9c1.7 0 2.8-1.5 3.9-3.1.5-.7.9-1.5 1.2-2.3-3.2-1.2-3.9-5.4-3.9-6.4zm-3.7-11.8c.9-1.1 1.5-2.6 1.3-4.1-1.3.1-2.8.9-3.7 2-0.8.9-1.5 2.4-1.3 3.9 1.4.1 2.8-.7 3.7-1.8z"/>
@@ -68,48 +68,48 @@ export default function SlideQRCode() {
   const s = t.slideQR;
 
   return (
-    <div className="relative w-full h-full flex items-center p-16 overflow-hidden" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex items-center p-2 sm:p-10 md:p-4 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-20%", right: "-10%", opacity: 0.25 }}/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#22d3ee", bottom: "-20%", left: "-10%", opacity: 0.2, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1fr] gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1fr_1fr] lg:grid-cols-[1fr_1fr] gap-3 sm:gap-8 lg:gap-16 items-center py-2 sm:py-6 md:py-0 lg:py-0 pb-14 sm:pb-20 lg:pb-0">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-2 sm:mb-6">
             <IconSparkle size={16} className="text-cyan-400"/>
             <span className="text-white/80 text-xs tracking-wider uppercase font-semibold">{s.badge}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[3.5rem] font-black text-white leading-[1.05] mb-6 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-xl sm:text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] mb-2 sm:mb-6 tracking-[-0.03em]">
             {s.titlePart1}<br/>
             <span className="gradient-text-premium">{s.titlePart2}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg text-white/70 leading-relaxed mb-10">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-sm sm:text-lg text-white/70 leading-relaxed mb-4 sm:mb-10">
             {s.desc}
           </motion.p>
 
-          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="grid grid-cols-3 gap-4 mb-10">
+          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="grid grid-cols-3 gap-3 sm:gap-4 mb-4 sm:mb-10">
             {s.stats.map((stat, i) => (
-              <motion.div key={i} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.7 + i * 0.12, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }} className="glass-strong rounded-2xl p-4 text-center">
-                <div className="text-2xl font-black gradient-text-premium">{stat.value}</div>
-                <div className="text-white/60 text-xs mt-1">{stat.label}</div>
+              <motion.div key={i} initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.7 + i * 0.12, duration: 0.6, ease: [0.34, 1.56, 0.64, 1] }} className="glass-strong rounded-2xl p-1.5 sm:p-4 text-center">
+                <div className="text-lg sm:text-2xl font-black gradient-text-premium">{stat.value}</div>
+                <div className="text-white/60 text-[10px] sm:text-xs mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
 
-          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className="flex flex-col gap-3">
+          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.9, duration: 0.8 }} className="flex flex-col gap-2 mb-4 sm:mb-8 lg:mb-0">
             <StoreBadge type="apple" label={s.appStoreLabel} sublabel={s.appStore}/>
             <StoreBadge type="google" label={s.playStoreLabel} sublabel={s.playStore}/>
           </motion.div>
         </div>
 
-        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="flex flex-col items-center gap-8">
-          <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,0.25), rgba(34,211,238,0.1), transparent 70%)" }}/>
+        <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ delay: 0.4, duration: 1 }} className="flex flex-col items-center gap-4 sm:gap-8">
+          <motion.div animate={{ scale: [1, 1.15, 1] }} transition={{ duration: 4, repeat: Infinity }} className="hidden sm:block absolute w-[500px] h-[500px] rounded-full blur-3xl pointer-events-none" style={{ background: "radial-gradient(circle, rgba(99,102,241,0.25), rgba(34,211,238,0.1), transparent 70%)" }}/>
 
-          <div className="flex gap-8 relative">
-            <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="flex flex-col items-center gap-4">
-              <div className="relative w-52 h-52 rounded-3xl p-4 glass-strong" style={{ boxShadow: "0 20px 60px rgba(99,102,241,0.35)" }}>
+          <div className="flex sm:flex-row md:flex-col lg:flex-row gap-4 sm:gap-6 lg:gap-8 relative">
+            <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.6, duration: 0.8 }} className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="relative w-[150px] h-[150px] sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-3xl p-4 glass-strong" style={{ boxShadow: "0 20px 60px rgba(99,102,241,0.35)" }}>
                 <motion.div animate={{ opacity: [0.4, 0.8, 0.4] }} transition={{ duration: 3, repeat: Infinity }} className="absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 40px rgba(99,102,241,0.3)" }}/>
                 <QRPattern color="#6366f1" id="appstore"/>
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -126,8 +126,8 @@ export default function SlideQRCode() {
               </div>
             </motion.div>
 
-            <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="flex flex-col items-center gap-4">
-              <div className="relative w-52 h-52 rounded-3xl p-4 glass-strong" style={{ boxShadow: "0 20px 60px rgba(34,211,238,0.3)" }}>
+            <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8, duration: 0.8 }} className="flex flex-col items-center gap-2 sm:gap-3">
+              <div className="relative w-[150px] h-[150px] sm:w-44 sm:h-44 lg:w-52 lg:h-52 rounded-3xl p-4 glass-strong" style={{ boxShadow: "0 20px 60px rgba(34,211,238,0.3)" }}>
                 <motion.div animate={{ opacity: [0.4, 0.8, 0.4] }} transition={{ duration: 3, repeat: Infinity, delay: 1.5 }} className="absolute inset-0 rounded-3xl" style={{ boxShadow: "inset 0 0 40px rgba(34,211,238,0.25)" }}/>
                 <QRPattern color="#22d3ee" id="googleplay"/>
                 <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
@@ -148,7 +148,7 @@ export default function SlideQRCode() {
             </motion.div>
           </div>
 
-          <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2, duration: 0.8, ease: "backOut" }} className="flex items-center gap-2 px-5 py-2.5 rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
+          <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={{ opacity: 1, scale: 1 }} transition={{ delay: 1.2, duration: 0.8, ease: "backOut" }} className="flex items-center gap-2 px-4 py-2 rounded-full" style={{ background: "rgba(255,255,255,0.06)", border: "1px solid rgba(255,255,255,0.12)" }}>
             <motion.div animate={{ scale: [1, 1.5, 1], opacity: [1, 0.4, 1] }} transition={{ duration: 1.8, repeat: Infinity }} className="w-2 h-2 rounded-full bg-green-400"/>
             <span className="text-white/70 text-sm">arbione.az/app</span>
           </motion.div>
