@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
 import { IconSparkle } from "../shared/Icons";
@@ -37,33 +37,33 @@ export default function SlideModulesOverview() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex items-center p-12 overflow-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
+    <div className="relative w-full h-full flex items-center p-2 sm:p-6 lg:p-10 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#a78bfa", top: "-15%", right: "-10%", opacity: 0.12 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#22d3ee", bottom: "-10%", left: "-5%", opacity: 0.1, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-[1500px] mx-auto w-full">
-        <div className="text-center mb-10">
+      <div className="relative z-10 max-w-[1500px] mx-auto w-full py-2 sm:py-4 lg:py-0 pb-12 sm:pb-20 lg:pb-0">
+        <div className="text-center mb-1 sm:mb-6 lg:mb-6">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-5"
+            className="inline-flex items-center gap-2 px-3 sm:px-3.5 py-0.5 sm:py-1 rounded-full bg-primary/10 border border-primary/20 mb-1 sm:mb-3"
           >
             <IconSparkle size={14} className="text-primary"/>
             <span className="text-primary text-xs tracking-wider uppercase font-semibold">{t.badges.modules}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[3.5rem] font-black text-slate-900 leading-[1.05] mb-4 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-xl sm:text-3xl lg:text-[2.8rem] font-black text-slate-900 leading-[1.05] mb-1 sm:mb-2 tracking-[-0.03em]">
             {t.slideModulesOverview.title} <span className="gradient-text-premium">{t.slideModulesOverview.titleHighlight}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-base text-slate-600 leading-relaxed max-w-4xl mx-auto">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.2, duration: 0.8 }} className="text-xs sm:text-sm text-slate-600 leading-snug sm:leading-relaxed max-w-3xl mx-auto">
             {t.slideModulesOverview.desc}
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-4 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1 sm:gap-2.5">
           {t.slideModulesOverview.modules.map((m, i) => (
             <motion.div
               key={i}
@@ -71,7 +71,7 @@ export default function SlideModulesOverview() {
               animate={{ y: 0, opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 + i * 0.05, duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
               whileHover={{ y: -5, scale: 1.03 }}
-              className="relative bg-white rounded-2xl p-4 cursor-default overflow-hidden group"
+              className="relative bg-white rounded-2xl p-1.5 sm:p-3.5 cursor-default overflow-hidden group"
               style={{ boxShadow: "0 4px 16px rgba(99,102,241,0.08)" }}
             >
               <div className={`absolute -top-10 -right-10 w-24 h-24 rounded-full bg-gradient-to-br ${moduleColors[i]} opacity-10 group-hover:opacity-30 transition-opacity blur-xl`}/>
@@ -80,16 +80,16 @@ export default function SlideModulesOverview() {
                 <motion.div
                   animate={{ rotate: [0, 5, -5, 0] }}
                   transition={{ duration: 4, repeat: Infinity, delay: i * 0.2 }}
-                  className={`w-12 h-12 rounded-xl bg-gradient-to-br ${moduleColors[i]} flex items-center justify-center text-white mb-3`}
+                  className={`w-8 sm:w-10 h-8 sm:h-10 rounded-lg sm:rounded-xl bg-gradient-to-br ${moduleColors[i]} flex items-center justify-center text-white mb-1 sm:mb-2`}
                   style={{ boxShadow: `0 4px 12px rgba(99,102,241,0.2)` }}
                 >
                   {moduleIcons[i]}
                 </motion.div>
                 
-                <div className={`text-base font-bold bg-gradient-to-r ${moduleColors[i]} bg-clip-text text-transparent mb-1.5`}>
+                <div className={`text-xs sm:text-base font-bold bg-gradient-to-r ${moduleColors[i]} bg-clip-text text-transparent mb-0.5 sm:mb-1`}>
                   {m.name}
                 </div>
-                <div className="text-slate-600 text-xs leading-relaxed">{m.desc}</div>
+                <div className="text-slate-600 text-[10px] sm:text-xs leading-tight sm:leading-snug">{m.desc}</div>
               </div>
             </motion.div>
           ))}

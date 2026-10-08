@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { IconUsers, IconChart, IconLocation, IconTask, IconSparkle } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -11,38 +11,38 @@ export default function SlideOrderSystem() {
   const moduleOrder = [0, 3, 1, 2];
 
   return (
-    <div className="relative w-full h-full flex items-center p-16 overflow-hidden" style={{ background: "#0a0b1e" }}>
+    <div className="relative w-full h-full flex items-center p-4 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#0a0b1e" }}>
       <div className="absolute inset-0 grid-bg opacity-60"/>
       <div className="absolute inset-0 mesh-gradient opacity-40"/>
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-20%", left: "-20%", opacity: 0.3 }}/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#22d3ee", bottom: "-20%", right: "-20%", opacity: 0.2, animationDelay: "-10s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1.1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.1fr] gap-4 sm:gap-8 lg:gap-16 items-center py-2 sm:py-6 lg:py-0 pb-16 sm:pb-20 lg:pb-0">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-2 sm:mb-6">
             <IconSparkle size={14} className="text-accent"/>
             <span className="text-white/80 text-xs tracking-wider uppercase font-semibold">{t.badges.theSolution}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[4rem] font-black text-white leading-[1.05] mb-8 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-2xl sm:text-4xl lg:text-[4rem] font-black text-white leading-[1.05] mb-3 sm:mb-8 tracking-[-0.03em]">
             {t.slide11.titlePart1}<br/>
             <span className="gradient-text-premium">{t.slide11.titlePart2}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-xl text-white/80 leading-relaxed mb-6">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-sm sm:text-xl text-white/80 leading-relaxed mb-3 sm:mb-6">
             {t.slide11.descPrefix} <span className="text-white font-bold">{t.slide11.descBold}</span> {t.slide11.descSuffix}
           </motion.p>
 
-          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="flex flex-wrap gap-3">
+          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="flex flex-wrap gap-2 sm:gap-3 mb-4 sm:mb-6 lg:mb-0">
             {t.slide11.modules.map((m, i) => (
-              <motion.span key={m.name} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.7 + i * 0.1, duration: 0.5, ease: "backOut" }} className="px-4 py-2 rounded-full glass-strong text-white text-sm font-semibold">
+              <motion.span key={m.name} initial={{ scale: 0 }} animate={{ scale: 1 }} transition={{ delay: 0.7 + i * 0.1, duration: 0.5, ease: "backOut" }} className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass-strong text-white text-xs sm:text-sm font-semibold">
                 {m.name}
               </motion.span>
             ))}
           </motion.div>
         </div>
 
-        <div className="grid grid-cols-2 gap-5 relative">
+        <div className="grid grid-cols-2 gap-3 sm:gap-5 relative">
           {moduleOrder.map((mIdx, gridIdx) => {
             const m = t.slide11.modules[mIdx];
             return (
@@ -56,7 +56,7 @@ export default function SlideOrderSystem() {
               >
                 <motion.div animate={{ scale: [1, 1.1, 1], opacity: [0.4, 0.7, 0.4] }} transition={{ duration: 3, repeat: Infinity, delay: gridIdx * 0.3 }} className="absolute -inset-2 rounded-3xl blur-2xl" style={{ background: glowColors[mIdx] }}/>
                 
-                <div className="relative h-full rounded-3xl glass-strong p-6 flex flex-col items-center justify-center text-center overflow-hidden">
+                <div className="relative h-full rounded-3xl glass-strong p-3 sm:p-6 flex flex-col items-center justify-center text-center overflow-hidden">
                   <div className={`absolute inset-0 bg-gradient-to-br ${moduleColors[mIdx]} opacity-0 group-hover:opacity-20 transition-opacity duration-500`}/>
                   
                   <motion.div animate={{ y: [0, -10, 0], rotate: [0, 5, -5, 0] }} transition={{ duration: 4, repeat: Infinity, delay: gridIdx * 0.3 }} className="mb-4">

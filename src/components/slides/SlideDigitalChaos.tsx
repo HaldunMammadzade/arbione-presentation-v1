@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -63,7 +63,7 @@ export default function SlideDigitalChaos() {
 
   return (
     <div
-      className="relative w-full h-full flex items-center p-10 lg:p-12 overflow-hidden noise-overlay"
+      className="relative w-full h-full flex items-center p-4 sm:p-8 lg:p-12 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay"
       style={{ background: "#06071a" }}
     >
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
@@ -71,14 +71,14 @@ export default function SlideDigitalChaos() {
       <div className="aurora-blob" style={{ width: 600, height: 600, background: "#6366f1", top: "-10%", left: "-5%", opacity: 0.3 }}/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#a78bfa", bottom: "-10%", right: "-5%", opacity: 0.25, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1.35fr_1fr] gap-10 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.35fr_1fr] gap-6 lg:gap-8 items-center py-2 sm:py-6 lg:py-0 pb-16 sm:pb-20 lg:pb-0">
         <div>
           {/* Badge */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-3 sm:mb-8"
           >
             <motion.div
               animate={{ scale: [1, 1.5, 1] }}
@@ -95,14 +95,14 @@ export default function SlideDigitalChaos() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.9 }}
-            className="text-[3.8rem] lg:text-[4.1rem] font-black text-white leading-[1.02] tracking-[-0.03em] mb-8"
+            className="text-2xl sm:text-4xl lg:text-[4.1rem] font-black text-white leading-[1.05] tracking-[-0.03em] mb-3 sm:mb-8"
           >
             {t.slide5.titlePart1} <br/>
             <span className="gradient-text-premium">{t.slide5.titlePart2}</span>
           </motion.h2>
 
           {/* Animated stat cards */}
-          <div className="space-y-3">
+          <div className="space-y-2 sm:space-y-3">
             {t.slide5.stats.map((s, i) => (
               <motion.div
                 key={i}
@@ -110,7 +110,7 @@ export default function SlideDigitalChaos() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.4 + i * 0.12, duration: 0.7, ease: [0.25, 1, 0.5, 1] }}
                 whileHover={{ x: 10 }}
-                className="relative flex items-start gap-5 p-4 rounded-2xl border border-white/5 glass cursor-default group overflow-hidden"
+                className="relative flex items-start gap-3 sm:gap-5 p-3 sm:p-4 rounded-2xl border border-white/5 glass cursor-default group overflow-hidden"
               >
                 {/* Hover glow ring */}
                 <motion.div
@@ -129,7 +129,7 @@ export default function SlideDigitalChaos() {
                 />
 
                 {/* Animated number */}
-                <div className="text-3xl lg:text-4xl font-black gradient-text-premium min-w-[120px] leading-none relative z-10">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black gradient-text-premium min-w-[76px] sm:min-w-[120px] leading-none relative z-10">
                   {STAT_META[i] ? (
                     <AnimCounter
                       to={STAT_META[i].to}
@@ -163,7 +163,7 @@ export default function SlideDigitalChaos() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.3, duration: 0.8 }}
-            className="mt-5 text-white/70 text-base lg:text-lg italic border-l-2 border-accent pl-4"
+            className="mt-3 sm:mt-5 text-sm text-white/70 sm:text-base lg:text-lg italic border-l-2 border-accent pl-4"
           >
             {t.slide5.footer}
           </motion.p>
@@ -174,7 +174,7 @@ export default function SlideDigitalChaos() {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ delay: 0.6, duration: 1.2 }}
-          className="relative flex items-center justify-center"
+          className="relative hidden lg:flex items-center justify-center"
         >
           <div className="relative w-[700px] h-[500px]">
             {/* BG glow */}

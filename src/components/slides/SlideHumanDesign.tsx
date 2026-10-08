@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { IconSparkle } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -7,19 +7,19 @@ export default function SlideHumanDesign() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex items-center p-20 overflow-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
+    <div className="relative w-full h-full flex items-center p-6 sm:p-12 lg:p-20 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#a78bfa", top: "-10%", right: "-5%", opacity: 0.15 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#818cf8", bottom: "-20%", left: "-5%", opacity: 0.15, animationDelay: "-10s" }}/>
 
-      <div className="max-w-7xl mx-auto w-full grid grid-cols-[1.1fr_1fr] gap-20 items-center relative z-10">
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-center relative z-10 py-6 lg:py-0 pb-28 sm:pb-20 lg:pb-0">
         <div>
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-6">
             <IconSparkle size={14} className="text-primary"/>
             <span className="text-primary text-xs tracking-wider uppercase font-semibold">{t.badges.humanCentered}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[3.5rem] font-black text-slate-900 leading-[1.05] mb-10 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-3xl sm:text-4xl lg:text-[3.5rem] font-black text-slate-900 leading-[1.05] mb-6 sm:mb-10 tracking-[-0.03em]">
             {t.slide8.titlePart1}<br/>
             <span className="gradient-text-premium">{t.slide8.titlePart2}</span>
           </motion.h2>
@@ -30,13 +30,13 @@ export default function SlideHumanDesign() {
                 <motion.div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-primary to-accent flex items-center justify-center mt-0.5 group-hover:scale-110 transition-transform" style={{ boxShadow: "0 4px 12px rgba(99,102,241,0.3)" }}>
                   <span className="text-white text-xs font-bold">{i + 1}</span>
                 </motion.div>
-                <p className="text-slate-700 text-base leading-relaxed flex-1 pt-1.5">{item}</p>
+                <p className="text-slate-700 text-sm sm:text-base leading-relaxed flex-1 pt-1.5">{item}</p>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <motion.div initial={{ scale: 0, rotate: -30 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 0.5, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative flex items-center justify-center">
+        <motion.div initial={{ scale: 0, rotate: -30 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 0.5, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative hidden lg:flex items-center justify-center">
           <div className="relative w-[500px] h-[500px] flex items-center justify-center">
             <motion.div animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.6, 0.2] }} transition={{ duration: 4, repeat: Infinity }} className="absolute inset-0 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, #a78bfa 0%, #6366f1 40%, transparent 70%)" }}/>
             

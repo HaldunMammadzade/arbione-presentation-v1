@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { IconLocation, IconCheck } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -8,24 +8,24 @@ export default function SlideGPS() {
   const { t } = useLocale();
 
   return (
-    <div className="relative w-full h-full flex items-center p-16 overflow-hidden" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex items-center p-6 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#22d3ee", top: "-20%", left: "-15%", opacity: 0.2 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#818cf8", bottom: "-15%", right: "-10%", opacity: 0.2, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1.1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.1fr] gap-8 md:gap-6 lg:gap-16 items-center py-6 md:py-3 lg:py-0 pb-28 md:pb-16 sm:pb-20 lg:pb-0">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-4 sm:mb-6">
             <IconLocation size={16}/>
             <span className="text-white/80 text-xs tracking-wider uppercase font-semibold">{t.slide13.moduleLabel}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[3.5rem] font-black text-white leading-[1.05] mb-6 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-3xl sm:text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] mb-4 sm:mb-6 tracking-[-0.03em]">
             {t.slide13.titlePart1}<br/>
             <span className="gradient-text-premium">{t.slide13.titlePart2}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg text-white/75 leading-relaxed mb-8">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-base sm:text-lg text-white/75 leading-relaxed mb-6 sm:mb-8">
             {t.slide13.descPrefix} <span className="gradient-text-premium font-semibold">{t.slide13.descHighlight}</span>{t.slide13.descSuffix}
           </motion.p>
 
@@ -33,13 +33,13 @@ export default function SlideGPS() {
             {t.slide13.features.map((f, i) => (
               <motion.div key={i} initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5 + i * 0.12, duration: 0.6 }} whileHover={{ x: 8 }} className="flex items-center gap-3 text-white/90 group cursor-default">
                 <IconCheck size={22}/>
-                <span className="group-hover:text-white transition-colors">{f}</span>
+                <span className="group-hover:text-white transition-colors text-sm sm:text-base">{f}</span>
               </motion.div>
             ))}
           </div>
         </div>
 
-        <InteractiveTiltCard delay={0.4} glowColor="rgba(34, 211, 238, 0.45)" className="h-[550px]">
+        <InteractiveTiltCard delay={0.4} glowColor="rgba(34, 211, 238, 0.45)" className="h-[550px] hidden lg:block">
           <div className="relative h-full">
             <motion.div animate={{ scale: [1, 1.05, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40 pointer-events-none" style={{ background: "linear-gradient(135deg, #22d3ee, #6366f1)" }}/>
 

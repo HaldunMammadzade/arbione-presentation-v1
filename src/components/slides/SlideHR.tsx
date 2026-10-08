@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { IconUsers, IconCheck } from "../shared/Icons";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -16,30 +16,30 @@ export default function SlideHR() {
   const performances = [92, 88, 95];
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex items-center justify-center p-2 sm:p-10 lg:p-16 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-30"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#818cf8", top: "-20%", left: "-15%", opacity: 0.25 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#a78bfa", bottom: "-15%", right: "-10%", opacity: 0.2, animationDelay: "-8s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1fr_1.1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1fr_1.1fr] lg:grid-cols-[1fr_1.1fr] gap-2 sm:gap-8 lg:gap-16 items-center py-2 sm:py-6 lg:py-0 pb-14 sm:pb-20 lg:pb-0">
         <div>
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6">
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="inline-flex items-center gap-2 px-3 sm:px-4 py-0.5 sm:py-1.5 rounded-full glass mb-2 sm:mb-6">
             <IconUsers size={16}/>
             <span className="text-white/80 text-xs tracking-wider uppercase font-semibold">{t.slide12.moduleLabel}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[3.5rem] font-black text-white leading-[1.05] mb-6 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-xl sm:text-4xl lg:text-[3.5rem] font-black text-white leading-[1.05] mb-2 sm:mb-6 tracking-[-0.03em]">
             {t.slide12.titlePart1}<br/>
             <span className="gradient-text-premium">{t.slide12.titlePart2}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-lg text-white/75 leading-relaxed mb-8">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-sm sm:text-lg text-white/75 leading-snug sm:leading-relaxed mb-2 sm:mb-8">
             {t.slide12.descPrefix} <span className="gradient-text-premium font-semibold">{t.slide12.descHighlight}</span>{t.slide12.descSuffix}
           </motion.p>
 
-          <div className="space-y-3">
+          <div className="space-y-1 sm:space-y-3">
             {t.slide12.features.map((f, i) => (
-              <motion.div key={i} initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5 + i * 0.12, duration: 0.6 }} whileHover={{ x: 8 }} className="flex items-center gap-3 text-white/90 group cursor-default">
+              <motion.div key={i} initial={{ x: -30, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 0.5 + i * 0.12, duration: 0.6 }} whileHover={{ x: 8 }} className="flex items-center gap-2.5 sm:gap-3 text-sm sm:text-base text-white/90 group cursor-default">
                 <IconCheck size={22}/>
                 <span className="group-hover:text-white transition-colors">{f}</span>
               </motion.div>
@@ -51,9 +51,9 @@ export default function SlideHR() {
           <div className="relative">
             <motion.div animate={{ scale: [1, 1.03, 1] }} transition={{ duration: 4, repeat: Infinity }} className="absolute -inset-6 rounded-3xl blur-3xl opacity-40 pointer-events-none" style={{ background: "linear-gradient(135deg, #6366f1, #a78bfa)" }}/>
 
-            <div className="relative glass-strong rounded-3xl p-6 overflow-hidden">
-            <div className="flex items-center gap-3 mb-6 pb-4 border-b border-white/10">
-              <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="w-12 h-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center" style={{ boxShadow: "0 8px 20px rgba(99,102,241,0.4)" }}>
+            <div className="relative glass-strong rounded-3xl p-2 sm:p-6 overflow-hidden">
+            <div className="flex items-center gap-3 mb-2 sm:mb-6 pb-1.5 sm:pb-4 border-b border-white/10">
+              <motion.div animate={{ rotate: [0, 10, -10, 0] }} transition={{ duration: 5, repeat: Infinity }} className="w-9 sm:w-12 h-9 sm:h-12 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center" style={{ boxShadow: "0 8px 20px rgba(99,102,241,0.4)" }}>
                 <IconUsers size={28}/>
               </motion.div>
               <div>
@@ -65,25 +65,25 @@ export default function SlideHR() {
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-3 mb-6">
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mb-2 sm:mb-6">
               {[
                 { label: t.slide12.ui.total, value: "247", gradient: "from-violet-500 to-indigo-500" },
                 { label: t.slide12.ui.active, value: "89%", gradient: "from-emerald-500 to-cyan-500" },
                 { label: t.slide12.ui.retention, value: "94%", gradient: "from-amber-500 to-orange-500" },
               ].map((stat, i) => (
-                <motion.div key={i} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }} className="glass rounded-xl p-3">
-                  <div className="text-white/50 text-xs mb-1">{stat.label}</div>
-                  <div className={`text-2xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>{stat.value}</div>
+                <motion.div key={i} initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.8 + i * 0.1 }} className="glass rounded-xl p-1.5 sm:p-3">
+                  <div className="text-white/50 text-xs mb-0.5 sm:mb-1">{stat.label}</div>
+                  <div className={`text-xl sm:text-2xl font-black bg-gradient-to-r ${stat.gradient} bg-clip-text text-transparent`}>{stat.value}</div>
                 </motion.div>
               ))}
             </div>
 
-            <div className="glass rounded-2xl p-4 mb-4">
-              <div className="flex items-center justify-between mb-3">
+            <div className="glass rounded-2xl p-1.5 sm:p-4 mb-1.5 sm:mb-4">
+              <div className="flex items-center justify-between mb-1.5 sm:mb-3">
                 <div className="text-white/80 text-sm font-medium">{t.slide12.ui.trend}</div>
                 <div className="text-green-400 text-xs font-semibold">+12%</div>
               </div>
-              <svg viewBox="0 0 300 80" className="w-full">
+              <svg viewBox="0 0 300 80" className="hidden sm:block w-full">
                 <defs>
                   <linearGradient id="hrAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#818cf8" stopOpacity="0.4"/><stop offset="100%" stopColor="#818cf8" stopOpacity="0"/></linearGradient>
                 </defs>
@@ -98,9 +98,9 @@ export default function SlideHR() {
               </svg>
             </div>
 
-            <div className="space-y-2">
+            <div className="space-y-0.5 sm:space-y-2">
               {employees.map((emp, i) => (
-                <motion.div key={i} initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 1.5 + i * 0.1 }} whileHover={{ x: 5 }} className="flex items-center gap-3 p-2.5 glass rounded-xl cursor-pointer">
+                <motion.div key={i} initial={{ x: -20, opacity: 0 }} animate={{ x: 0, opacity: 1 }} transition={{ delay: 1.5 + i * 0.1 }} whileHover={{ x: 5 }} className="flex items-center gap-2.5 sm:gap-3 p-1 sm:p-2.5 glass rounded-xl cursor-pointer">
                   <motion.div animate={{ rotate: [0, 360] }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }} className="w-9 h-9 rounded-full bg-gradient-to-br from-primary via-accent to-purple-400 flex items-center justify-center text-white text-xs font-bold">
                     {emp.name.charAt(0)}
                   </motion.div>
@@ -109,7 +109,7 @@ export default function SlideHR() {
                     <div className="text-white/50 text-xs">{emp.role}</div>
                   </div>
                   <div className="text-white/70 text-xs font-mono">{performances[i]}%</div>
-                  <div className="w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
+                  <div className="w-10 sm:w-16 h-1.5 rounded-full bg-white/10 overflow-hidden">
                     <motion.div initial={{ width: 0 }} animate={{ width: `${performances[i]}%` }} transition={{ delay: 1.8 + i * 0.1, duration: 1 }} className="h-full bg-gradient-to-r from-primary to-accent"/>
                   </div>
                 </motion.div>

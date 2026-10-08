@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { useLocale } from "@/contexts/LocaleContext";
@@ -31,20 +31,12 @@ export default function SlideTagline() {
       });
     }
 
-    let mouseX = w / 2, mouseY = h;
-    const onMove = (e: MouseEvent) => { mouseX = e.clientX; mouseY = e.clientY; };
-    window.addEventListener("mousemove", onMove);
-
     let animId: number;
     const animate = () => {
       ctx.clearRect(0, 0, w, h);
       
       nodes.forEach(n => {
         n.x += n.vx; n.y += n.vy; n.pulse += 0.02;
-        const dmx = mouseX - n.x;
-        const dmy = mouseY - n.y;
-        const dm = Math.hypot(dmx, dmy);
-        if (dm < 200) { n.vx -= (dmx / dm) * 0.02; n.vy -= (dmy / dm) * 0.02; }
         n.vx *= 0.99; n.vy *= 0.99;
         if (n.x < 0 || n.x > w) n.vx *= -1;
         if (n.y < h * 0.5 || n.y > h) n.vy *= -1;
@@ -90,20 +82,20 @@ export default function SlideTagline() {
 
     const onResize = () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; };
     window.addEventListener("resize", onResize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", onResize); window.removeEventListener("mousemove", onMove); };
+    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", onResize); };
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center justify-center" style={{ background: "#06071a" }}>
+    <div className="relative w-full h-full flex items-center justify-center p-4 sm:p-12 overflow-y-auto lg:overflow-hidden overflow-x-hidden" style={{ background: "#06071a" }}>
       <div className="absolute inset-0 mesh-gradient opacity-40"/>
-      <canvas ref={canvasRef} className="absolute inset-0"/>
+      <canvas ref={canvasRef} className="absolute inset-0 pointer-events-none"/>
       
-      <div className="relative z-10 text-center px-12 max-w-6xl">
+      <div className="relative z-10 text-center px-4 sm:px-12 max-w-6xl py-4 sm:py-0">
         <motion.div
           initial={{ opacity: 0, scale: 0 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 1 }}
-          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-10"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass mb-4 sm:mb-10"
         >
           <div className="w-2 h-2 rounded-full bg-accent animate-pulse"/>
           <span className="text-white/80 text-xs tracking-[0.3em] uppercase">{t.badges.vision}</span>
@@ -114,7 +106,7 @@ export default function SlideTagline() {
           initial={{ y: 60, opacity: 0, filter: "blur(20px)" }}
           animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
           transition={{ duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-          className="text-5xl md:text-6xl font-bold text-white leading-[1.25] tracking-tight"
+          className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.25] tracking-tight"
         >
           {t.slide2.title.split(" ").map((word, i) => (
             <motion.span
@@ -122,7 +114,7 @@ export default function SlideTagline() {
               initial={{ y: 60, opacity: 0, filter: "blur(20px)" }}
               animate={{ y: 0, opacity: 1, filter: "blur(0px)" }}
               transition={{ delay: 0.3 + i * 0.05, duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-              className="inline-block mr-3"
+              className="inline-block mr-2 sm:mr-3"
             >
               {word}
             </motion.span>
@@ -134,7 +126,7 @@ export default function SlideTagline() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="mt-10 text-lg md:text-xl text-white/70 leading-relaxed max-w-4xl mx-auto"
+          className="mt-4 sm:mt-10 text-sm sm:text-lg md:text-xl text-white/70 leading-relaxed max-w-4xl mx-auto"
         >
           {t.slide2.desc}
         </motion.p>
@@ -143,7 +135,7 @@ export default function SlideTagline() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1.6, duration: 0.8 }}
-          className="mt-6 text-base md:text-lg gradient-text-premium font-semibold italic"
+          className="mt-2 sm:mt-6 text-sm sm:text-base md:text-lg gradient-text-premium font-semibold italic"
         >
           {t.slide2.desc2}
         </motion.p>

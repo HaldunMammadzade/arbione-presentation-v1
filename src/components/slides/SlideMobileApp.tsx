@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
 import { IconCheck } from "../shared/Icons";
@@ -8,15 +8,15 @@ export default function SlideMobileApp() {
   const { t } = useLocale();
 
   return (
-    <KineticGrid className="w-full h-full flex items-center justify-center p-16">
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1.1fr_1fr] gap-16 items-center">
+    <KineticGrid className="w-full h-full flex items-center justify-center p-4 sm:p-10 lg:p-12 overflow-y-auto lg:overflow-hidden overflow-x-hidden">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 md:grid-cols-[1.1fr_1fr] lg:grid-cols-[1.1fr_1fr] gap-4 sm:gap-8 lg:gap-16 items-center py-0 sm:py-6 lg:py-0 pb-16 sm:pb-20 lg:pb-0">
         {/* Left Column */}
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-6 border border-primary/30"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-2 sm:mb-6 border border-primary/30"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
               <rect
@@ -39,7 +39,7 @@ export default function SlideMobileApp() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 0.9 }}
-            className="text-[3.8rem] font-black text-white leading-[1.05] mb-4 tracking-[-0.03em]"
+            className="text-2xl sm:text-4xl lg:text-[3.8rem] font-black text-white leading-[1.05] mb-2 sm:mb-4 tracking-[-0.03em]"
           >
             {t.slideMobileApp.title}
           </motion.h2>
@@ -47,7 +47,7 @@ export default function SlideMobileApp() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.15, duration: 0.9 }}
-            className="text-3xl font-bold gradient-text-premium mb-8"
+            className="text-xl sm:text-3xl font-bold gradient-text-premium mb-3 sm:mb-8"
           >
             {t.slideMobileApp.titleHighlight}
           </motion.h3>
@@ -56,12 +56,12 @@ export default function SlideMobileApp() {
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-lg text-white/75 leading-relaxed mb-8"
+            className="text-sm sm:text-lg text-white/75 leading-relaxed mb-4 sm:mb-8"
           >
             {t.slideMobileApp.desc}
           </motion.p>
 
-          <div className="space-y-3.5">
+          <div className="space-y-2 sm:space-y-3.5">
             {t.slideMobileApp.features.map((f, i) => (
               <motion.div
                 key={i}
@@ -69,12 +69,12 @@ export default function SlideMobileApp() {
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.5 + i * 0.1, duration: 0.5 }}
                 whileHover={{ x: 8 }}
-                className="flex items-start gap-3 text-white/85 group cursor-default"
+                className="flex items-start gap-2 sm:gap-3 text-white/85 group cursor-default"
               >
                 <div className="mt-0.5 text-primary-light group-hover:scale-110 transition-transform">
                   <IconCheck size={22} />
                 </div>
-                <span className="leading-relaxed group-hover:text-white transition-colors">
+                <span className="text-sm sm:text-base leading-relaxed group-hover:text-white transition-colors">
                   {f}
                 </span>
               </motion.div>
@@ -87,7 +87,7 @@ export default function SlideMobileApp() {
           initial={{ scale: 0.85, opacity: 0, rotateY: -20 }}
           animate={{ scale: 1, opacity: 1, rotateY: 0 }}
           transition={{ delay: 0.5, duration: 1.2, ease: [0.25, 1, 0.5, 1] }}
-          className="relative flex items-center justify-center"
+          className="hidden sm:flex relative items-center justify-center"
           style={{ perspective: 1500 }}
         >
           {/* Pulsing Aura Glow Behind Device */}

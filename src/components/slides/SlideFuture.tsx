@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion, useMotionValue, useTransform, animate } from "framer-motion";
 import { useEffect, useRef, useState, useCallback } from "react";
 import * as THREE from "three";
@@ -187,7 +187,7 @@ export default function SlideFuture() {
 
   return (
     <div
-      className="relative w-full h-full flex items-center p-20 overflow-hidden"
+      className="relative w-full h-full flex items-center p-4 sm:p-12 lg:p-20 overflow-y-auto lg:overflow-hidden overflow-x-hidden"
       style={{ background: "linear-gradient(135deg, #1e1b4b 0%, #4f46e5 40%, #6366f1 70%, #818cf8 100%)" }}
     >
       <Confetti active={confettiActive} />
@@ -213,13 +213,13 @@ export default function SlideFuture() {
         />
       ))}
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1.1fr_1fr] gap-16 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-4 sm:gap-8 lg:gap-16 items-center py-1 sm:py-6 lg:py-0 pb-14 sm:pb-20 lg:pb-0">
         <div>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-8"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass mb-2 sm:mb-8"
           >
             <IconSparkle size={14} className="text-white" />
             <span className="text-white/90 text-xs tracking-[0.3em] uppercase font-semibold">{t.badges.future}</span>
@@ -229,7 +229,7 @@ export default function SlideFuture() {
             initial={{ y: 60, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1 }}
-            className="text-[4.5rem] font-black text-white leading-[1.05] mb-10 tracking-[-0.03em]"
+            className="text-2xl sm:text-4xl lg:text-[4.5rem] font-black text-white leading-[1.05] mb-3 sm:mb-10 tracking-[-0.03em]"
             style={{ textShadow: "0 0 60px rgba(255,255,255,0.4)" }}
           >
             {t.slide19.titlePart1}<br/>
@@ -250,7 +250,7 @@ export default function SlideFuture() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 1 }}
-            className="text-xl text-white/90 leading-relaxed mb-8"
+            className="text-xl text-white/90 leading-relaxed mb-4 sm:mb-8"
           >
             {t.slide19.p1Prefix} <span className="font-bold">{t.slide19.p1Bold}</span>{t.slide19.p1Suffix}
           </motion.p>
@@ -259,7 +259,7 @@ export default function SlideFuture() {
             initial={{ y: 40, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.8, duration: 1 }}
-            className="text-2xl text-white font-semibold leading-relaxed mb-10"
+            className="text-2xl text-white font-semibold leading-relaxed mb-5 sm:mb-10"
           >
             {t.slide19.p2Prefix}<br/>
             <span className="underline decoration-white/40 decoration-2">{t.slide19.p2Underline}</span>
@@ -269,12 +269,12 @@ export default function SlideFuture() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.2, duration: 0.8 }}
-            className="flex gap-4"
+            className="flex flex-col sm:flex-row gap-2 sm:gap-4"
           >
             {/* Primary CTA with confetti */}
             <RippleButton
               onClick={() => { setConfettiActive(false); setTimeout(() => setConfettiActive(true), 50); }}
-              className="relative px-8 py-4 text-primary-dark font-bold rounded-2xl"
+              className="relative px-6 sm:px-8 py-2.5 sm:py-4 text-primary-dark font-bold rounded-2xl text-center"
               style={{
                 background: "white",
                 boxShadow: "0 20px 40px rgba(255,255,255,0.3), 0 0 0 0 rgba(255,255,255,0.5)",
@@ -292,7 +292,7 @@ export default function SlideFuture() {
                 transition={{ duration: 2, repeat: Infinity }}
                 className="absolute inset-0 rounded-2xl pointer-events-none"
               />
-              <span className="relative flex items-center gap-2 z-10">
+              <span className="relative flex items-center justify-center gap-2 z-10">
                 {t.slide19.cta1}
                 <motion.svg
                   width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"
@@ -305,7 +305,7 @@ export default function SlideFuture() {
             </RippleButton>
 
             <RippleButton
-              className="px-8 py-4 glass-strong text-white font-bold rounded-2xl border border-white/20"
+              className="px-6 sm:px-8 py-2.5 sm:py-4 glass-strong text-white font-bold rounded-2xl border border-white/20 text-center"
             >
               {t.slide19.cta2}
             </RippleButton>
@@ -316,10 +316,10 @@ export default function SlideFuture() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.8, duration: 0.8 }}
-            className="flex items-center gap-3 mt-8"
+            className="flex items-center gap-3 mt-4 sm:mt-8"
           >
             <div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"/>
-            <span className="text-white/60 text-sm">arbione.az · hello@arbione.az</span>
+            <span className="text-white/60 text-xs sm:text-sm">arbione.az · hello@arbione.az</span>
           </motion.div>
         </div>
 
@@ -328,7 +328,7 @@ export default function SlideFuture() {
           initial={{ scale: 0, rotate: -30 }}
           animate={{ scale: 1, rotate: 0 }}
           transition={{ delay: 0.5, duration: 1.5, ease: [0.25, 1, 0.5, 1] }}
-          className="flex items-center justify-center relative"
+          className="hidden lg:flex items-center justify-center relative"
         >
           <motion.div
             animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0.9, 0.4] }}

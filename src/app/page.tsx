@@ -127,11 +127,16 @@ export default function Home() {
   return (
     <MotionConfig reducedMotion="never">
       <main
-        className="relative w-screen h-screen overflow-hidden cursor-default"
+        className="relative w-full max-w-full viewport-height overflow-hidden cursor-default"
         style={{ perspective: "1200px" }}
+        onScroll={(e) => {
+          const el = e.currentTarget;
+          if (el.scrollLeft !== 0 || el.scrollTop !== 0) {
+            el.scrollLeft = 0;
+            el.scrollTop = 0;
+          }
+        }}
       >
-        <Spotlight theme={theme} />
-        <CursorTrail theme={theme} />
         <AnimatePresence mode="wait" custom={direction}>
           <motion.div
             key={currentSlide}

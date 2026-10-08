@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { useEffect, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import * as THREE from "three";
@@ -75,13 +75,6 @@ export default function SlideHero() {
     const lines = new THREE.LineSegments(lineGeom, lineMat);
     scene.add(lines);
 
-    let mx = 0, my = 0;
-    const onMove = (e: MouseEvent) => {
-      mx = e.clientX - window.innerWidth / 2;
-      my = e.clientY - window.innerHeight / 2;
-    };
-    document.addEventListener("mousemove", onMove);
-
     let animId: number;
     const animate = () => {
       animId = requestAnimationFrame(animate);
@@ -112,8 +105,6 @@ export default function SlideHero() {
       }
       lines.geometry.setAttribute("position", new THREE.Float32BufferAttribute(lp, 3));
 
-      camera.position.x += (mx * 0.01 - camera.position.x) * 0.035;
-      camera.position.y += (-my * 0.01 - camera.position.y) * 0.035;
       camera.lookAt(scene.position);
 
       points.rotation.y += 0.0004;
@@ -131,7 +122,6 @@ export default function SlideHero() {
 
     return () => {
       cancelAnimationFrame(animId);
-      document.removeEventListener("mousemove", onMove);
       window.removeEventListener("resize", onResize);
       renderer.dispose();
     };
@@ -139,12 +129,12 @@ export default function SlideHero() {
 
   return (
     <div
-      className="relative w-full h-full overflow-hidden"
+      className="relative w-full h-full overflow-y-auto lg:overflow-hidden overflow-x-hidden flex items-center justify-center"
       style={{ background: "linear-gradient(135deg, #0b0f19 0%, #1e1b4b 35%, #312e81 70%, #4338ca 100%)" }}
     >
       {/* Aurora blobs - rich dynamic background glow */}
       <div className="aurora-blob" style={{ width: 650, height: 650, background: "#a78bfa", top: "-15%", left: "-12%", opacity: 0.35 }}/>
-      <div className="aurora-blob" style={{ width: 550, height: 550, background: "#22d3ee", bottom: "-15%", right: "-12%", opacity: 0.25, animationDelay: "-10s" }}/>
+      <div className="aurora-blob hidden sm:block" style={{ width: 550, height: 550, background: "#22d3ee", bottom: "-15%", right: "-12%", opacity: 0.25, animationDelay: "-10s" }}/>
       <div className="aurora-blob" style={{ width: 450, height: 450, background: "#f472b6", top: "25%", right: "8%", opacity: 0.18, animationDelay: "-5s" }}/>
 
       <canvas ref={canvasRef} className="absolute inset-0 z-0"/>
@@ -152,13 +142,13 @@ export default function SlideHero() {
       {/* Central scrim overlay: Keeps center dark for 100% text contrast while letting edge effects glow */}
       <div className="absolute inset-0 z-[1] pointer-events-none bg-[radial-gradient(ellipse_at_50%_50%,_rgba(11,15,25,0.78)_0%,_rgba(15,23,42,0.45)_55%,_transparent_90%)]" />
 
-      <div className="relative z-10 h-full flex flex-col items-center justify-center text-center px-8 pointer-events-none">
+      <div className="relative z-10 h-full w-full flex flex-col items-center justify-center text-center px-4 sm:px-8 pointer-events-none">
         {/* Logo */}
         <motion.div
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           transition={{ duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }}
-          className="relative mb-3"
+          className="relative mb-2"
         >
           {/* Soft pulsing glow behind logo */}
           <motion.div
@@ -174,7 +164,7 @@ export default function SlideHero() {
           <img
             src="/logo.svg"
             alt="Arbione Logo"
-            className="relative w-[440px] h-auto drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)]"
+            className="relative w-[180px] sm:w-[350px] md:w-[440px] h-auto drop-shadow-[0_12px_40px_rgba(0,0,0,0.5)]"
           />
         </motion.div>
 
@@ -183,7 +173,7 @@ export default function SlideHero() {
           initial={{ opacity: 0, scaleX: 0 }}
           animate={{ opacity: 1, scaleX: 1 }}
           transition={{ delay: 1.0, duration: 0.8 }}
-          className="h-px w-80 bg-gradient-to-r from-transparent via-white/70 to-transparent my-2"
+          className="h-px w-48 sm:w-80 bg-gradient-to-r from-transparent via-white/70 to-transparent my-2"
         />
 
         {/* Tagline */}
@@ -191,7 +181,7 @@ export default function SlideHero() {
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.2, duration: 0.8 }}
-          className="text-xl text-white font-light tracking-[0.6em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+          className="text-sm sm:text-lg md:text-xl text-white font-light tracking-[0.25em] sm:tracking-[0.6em] uppercase drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
         >
           {t.slide1.tagline}
         </motion.p>
@@ -201,7 +191,7 @@ export default function SlideHero() {
           initial={{ y: 15, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1.5, duration: 0.8 }}
-          className="mt-8 text-lg text-slate-100/95 font-light max-w-xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+          className="mt-2 sm:mt-8 text-sm sm:text-base md:text-lg text-slate-100/95 font-light max-w-xl leading-relaxed drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)] px-4"
         >
           {t.slide1.desc}
         </motion.p>
@@ -211,14 +201,14 @@ export default function SlideHero() {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.8, duration: 0.8 }}
-          className="flex gap-4 mt-8"
+          className="flex gap-4 mt-4"
         >
           {["12 Modul"].map((badge, i) => (
             <motion.div
               key={i}
               animate={{ y: [0, -5, 0] }}
               transition={{ duration: 2.8, repeat: Infinity, delay: i * 0.3 }}
-              className="px-5 py-2 rounded-full text-xs font-semibold tracking-wider uppercase shadow-xl"
+              className="px-4 py-1.5 rounded-full text-xs font-semibold tracking-wider uppercase shadow-xl"
               style={{
                 background: "rgba(255,255,255,0.16)",
                 border: "1px solid rgba(255,255,255,0.35)",
@@ -238,7 +228,7 @@ export default function SlideHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, -6, 0] }}
         transition={{ delay: 2.2, opacity: { duration: 0.6 }, y: { duration: 2, repeat: Infinity } }}
-        className="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/80 text-xs tracking-[0.5em] uppercase z-10 pointer-events-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
+        className="absolute bottom-20 sm:bottom-24 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-white/80 text-xs tracking-[0.5em] uppercase z-10 pointer-events-none drop-shadow-[0_2px_6px_rgba(0,0,0,0.6)]"
       >
         <span>{t.nav.discover}</span>
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

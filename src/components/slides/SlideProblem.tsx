@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 import { motion } from "framer-motion";
 import { useEffect, useRef } from "react";
 import { IconWarning } from "../shared/Icons";
@@ -89,12 +89,12 @@ export default function SlideProblem() {
   }, []);
 
   return (
-    <div className="relative w-full h-full flex items-center p-20 overflow-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
+    <div className="relative w-full h-full flex items-center p-5 sm:p-10 lg:p-20 overflow-y-auto lg:overflow-hidden overflow-x-hidden noise-overlay" style={{ background: "linear-gradient(135deg, #f8fafc 0%, #eef2ff 50%, #ede9fe 100%)" }}>
       <div className="absolute inset-0 grid-bg-light opacity-40"/>
       <div className="aurora-blob" style={{ width: 500, height: 500, background: "#ef4444", top: "-10%", right: "-5%", opacity: 0.08 }}/>
       <div className="aurora-blob" style={{ width: 400, height: 400, background: "#a78bfa", bottom: "-10%", left: "-5%", opacity: 0.15, animationDelay: "-10s" }}/>
 
-      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-[1.1fr_1fr] gap-20 items-center">
+      <div className="relative z-10 max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-16 items-center py-6 lg:py-0 pb-28 sm:pb-20 lg:pb-0">
         <div>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -106,23 +106,23 @@ export default function SlideProblem() {
             <span className="text-red-500 text-xs tracking-wider uppercase font-semibold">{t.badges.rootCause}</span>
           </motion.div>
 
-          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-[4.5rem] font-black text-slate-900 leading-[1.05] mb-10 tracking-[-0.03em]">
+          <motion.h2 initial={{ y: 40, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.9 }} className="text-3xl sm:text-4xl lg:text-[4.5rem] font-black text-slate-900 leading-[1.05] mb-6 sm:mb-10 tracking-[-0.03em]">
             {t.slide6.titlePart1} <br/><span className="gradient-text-premium">{t.slide6.titlePart2}</span>
           </motion.h2>
 
-          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-xl text-slate-600 leading-relaxed mb-8">
+          <motion.p initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.3, duration: 0.8 }} className="text-base sm:text-xl text-slate-600 leading-relaxed mb-6 sm:mb-8">
             {t.slide6.desc}
           </motion.p>
 
-          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="relative p-6 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.08), rgba(167,139,250,0.08))", border: "1px solid rgba(99,102,241,0.2)" }}>
+          <motion.div initial={{ y: 30, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5, duration: 0.8 }} className="relative p-4 sm:p-6 rounded-2xl overflow-hidden" style={{ background: "linear-gradient(135deg, rgba(99,102,241,0.08), rgba(167,139,250,0.08))", border: "1px solid rgba(99,102,241,0.2)" }}>
             <div className="absolute top-0 left-0 w-1 h-full bg-gradient-to-b from-primary to-accent"/>
-            <p className="text-xl text-slate-800 leading-relaxed font-medium">
+            <p className="text-base sm:text-xl text-slate-800 leading-relaxed font-medium">
               {t.slide6.callout}
             </p>
           </motion.div>
         </div>
 
-        <motion.div initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 0.4, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative flex items-center justify-center">
+        <motion.div initial={{ scale: 0, rotate: -20 }} animate={{ scale: 1, rotate: 0 }} transition={{ delay: 0.4, duration: 1.2, ease: [0.34, 1.56, 0.64, 1] }} className="relative hidden lg:flex items-center justify-center">
           <motion.div
             animate={{ scale: [1, 1.1, 1], opacity: [0.3, 0.6, 0.3] }}
             transition={{ duration: 4, repeat: Infinity }}
