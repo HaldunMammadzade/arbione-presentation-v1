@@ -179,3 +179,45 @@ html, body {
     0 4px 12px rgba(0, 0, 0, 0.2),
     0 24px 48px rgba(99, 102, 241, 0.15);
 }
+
+@keyframes plasma-flow {
+  0% { transform: scale(1) translate(0, 0) rotate(0deg); opacity: 0.3; }
+  33% { transform: scale(1.15) translate(4%, -3%) rotate(120deg); opacity: 0.55; }
+  66% { transform: scale(0.9) translate(-3%, 4%) rotate(240deg); opacity: 0.4; }
+  100% { transform: scale(1) translate(0, 0) rotate(360deg); opacity: 0.3; }
+}
+
+.plasma-glow {
+  animation: plasma-flow 18s ease-in-out infinite alternate;
+  filter: blur(100px);
+}
+
+@media print {
+  @page {
+    size: 1920px 1080px landscape;
+    margin: 0;
+  }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 1920px !important;
+    height: 1080px !important;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    background: #06071a !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-slide {
+    width: 100vw !important;
+    height: 100vh !important;
+    max-height: 100vh !important;
+    page-break-after: always !important;
+    break-after: page !important;
+    overflow: hidden !important;
+  }
+}
+
+

@@ -9,7 +9,7 @@ const path = require('path');
   
   await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 2 });
   
-  const totalSlides = 19;
+  const totalSlides = 26;
   const screenshots = [];
   
   for (let i = 0; i < totalSlides; i++) {

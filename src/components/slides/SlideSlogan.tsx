@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { useLocale } from "@/contexts/LocaleContext";
-import { IconBrain, IconShield, IconSparkle } from "../shared/Icons";
+import { IconBrain, IconShield } from "../shared/Icons";
 
 export default function SlideSlogan() {
   const { t } = useLocale();
@@ -15,11 +15,6 @@ export default function SlideSlogan() {
       {[...Array(60)].map((_, i) => (
         <motion.div key={i} className="absolute rounded-full" style={{ width: 1 + Math.random() * 2, height: 1 + Math.random() * 2, background: "white", left: `${Math.random()*100}%`, top: `${Math.random()*100}%`, boxShadow: "0 0 4px white" }} animate={{ opacity: [0.2, 1, 0.2], scale: [1, 2, 1] }} transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 3 }}/>
       ))}
-
-      <motion.div initial={{ opacity: 0, scale: 0 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.8 }} className="relative z-10 inline-flex items-center gap-2 px-5 py-2 rounded-full glass-strong mb-12">
-        <IconSparkle size={14} className="text-white"/>
-        <span className="text-white/90 text-xs tracking-[0.4em] uppercase font-semibold">{t.badges.slogan}</span>
-      </motion.div>
 
       <motion.div initial={{ y: 60, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 1, delay: 0.2 }} className="relative z-10 mb-20">
         <img src="/logo.svg" alt="Arbione" className="w-[320px] h-auto" style={{ filter: "drop-shadow(0 0 40px rgba(255,255,255,0.4))" }}/>
