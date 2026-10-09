@@ -13,7 +13,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Arbione — Şirkətin idarəetmə sistemi",
+  title: "Arbione — Biznes idarəetmə sistemi",
   description: "Arbione şirkətin insanını, işini, pulunu və əməliyyatını bir yerdə idarə edən sistemdir.",
 };
 

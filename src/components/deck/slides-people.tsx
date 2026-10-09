@@ -37,7 +37,7 @@ const GROUPS: { name: Tx; color: string; icon: IconName; items: Mod[] }[] = [
     items: [
       { n: "01", t: ["Başlanğıc", "Start", "Старт"], d: ["Rəhbər paneli, işçi və menecer kabineti", "Director panel, employee & manager cabinets", "Панель руководителя, кабинеты сотрудника и менеджера"], i: "layout" },
       { n: "15", t: ["Sənədlər və təsdiqlər", "Documents & approvals", "Документы и согласования"], d: ["Əmr, imza zənciri, şablon, elan", "Orders, signing chain, templates, news", "Приказы, подписи, шаблоны, объявления"], i: "sign" },
-      { n: "16", t: ["Hesabatlar və uyğunluq", "Reports & compliance", "Отчёты и соответствие"], d: ["Maliyyə, kadr, anbar, vergi", "Finance, HR, stock, tax", "Финансы, кадры, склад, налоги"], i: "report" },
+      { n: "16", t: ["Hesabatlar və uyğunluq", "Reports & compliance", "Отчёты и соответствие"], d: ["Maliyyə, işçi, anbar, vergi", "Finance, employees, stock, tax", "Финансы, сотрудники, склад, налоги"], i: "report" },
       { n: "17", t: ["İnteqrasiyalar və icazələr", "Integrations & access", "Интеграции и доступ"], d: ["1C, e-qaimə, bank-client, rollar", "1C, e-invoice, bank-client, roles", "1С, э-накладные, банк-клиент, роли"], i: "plug" },
     ],
   },
@@ -216,7 +216,7 @@ export function SlideDashboard() {
   const approvals: { t: Tx; who: string; s: Status; c: string }[] = [
     { t: ["Məzuniyyət · 5 gün", "Leave · 5 days", "Отпуск · 5 дней"], who: "Nigar Həsənova", s: "pending", c: C.brand },
     { t: ["Alış sifarişi · 12 450 ₼", "Purchase order · 12 450 ₼", "Заказ · 12 450 ₼"], who: "Satınalma", s: "pending", c: C.info },
-    { t: ["Əmr №214 · işə qəbul", "Order #214 · hiring", "Приказ №214 · приём"], who: "Kadr şöbəsi", s: "approved", c: C.warn },
+    { t: ["Əmr №214 · işə qəbul", "Order #214 · hiring", "Приказ №214 · приём"], who: "İşçi şöbəsi", s: "approved", c: C.warn },
     { t: ["Avans · 600 ₼", "Advance · 600 ₼", "Аванс · 600 ₼"], who: "Elvin Quliyev", s: "draft", c: C.ok },
   ];
   return (
@@ -247,9 +247,9 @@ export function SlideDashboard() {
               {
                 t: ["İşçi kabineti", "Employee cabinet", "Кабинет сотрудника"] as Tx,
                 d: [
-                  "Profil, elanlar, məzuniyyət, tabel, tapşırıq, təlim, aktivlər. Sorğu kadra zəng etmədən göndərilir.",
-                  "Profile, news, leave, timesheet, tasks, training, assets. Requests sent without calling HR.",
-                  "Профиль, объявления, отпуск, табель, задачи, обучение, активы. Заявки — без звонков в кадры.",
+                  "Profil, elanlar, məzuniyyət, tabel, tapşırıq, təlim, aktivlər. Sorğu işçi şöbəsinə zəng etmədən göndərilir.",
+                  "Profile, news, leave, timesheet, tasks, training, assets. Requests go out without calling the employee team.",
+                  "Профиль, объявления, отпуск, табель, задачи, обучение, активы. Заявки — без звонков в отдел сотрудников.",
                 ] as Tx,
                 i: "user" as IconName,
                 c: C.info,
@@ -462,7 +462,7 @@ export function SlideStructure() {
         <R d={0.25} className="w-[660px] shrink-0 n:w-full">
           <Card className="h-full p-8 flex flex-col n:p-5">
             <Accent color={C.brand} />
-            <div className="tx-cap text-ink/45 mb-5 n:mb-3">{t(["Kim kimin altındadır", "Who reports to whom", "Кто кому подчиняется"])}</div>
+            <div className="tx-cap text-ink/45 mb-5 n:mb-3">{t(["Tabeçilik strukturu", "Reporting structure", "Структура подчинения"])}</div>
             <div className="flex flex-col gap-2.5 n:gap-1.5">
               {TREE.map((n, i) => (
                 <motion.div

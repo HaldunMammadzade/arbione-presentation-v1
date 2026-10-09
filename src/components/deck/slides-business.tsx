@@ -111,7 +111,7 @@ export function SlideFinance() {
               <div className="flex items-center justify-between gap-3">
                 <div>
                   <div className="tx-h4">{t(["Əməkhaqqı təsdiqi · Oktyabr", "Payroll approval · October", "Утверждение зарплаты · Октябрь"])}</div>
-                  <div className="tx-xs text-ink/50">{t(["Kadrın hesabı avtomatik yazılışa çevrilir", "HR’s calculation becomes an entry automatically", "Расчёт кадров автоматически становится проводкой"])}</div>
+                  <div className="tx-xs text-ink/50">{t(["İşçi hesablaması avtomatik yazılışa çevrilir", "The employee calculation becomes a journal entry automatically", "Расчёт по сотрудникам автоматически становится проводкой"])}</div>
                 </div>
                 <StatusPill s="approved" />
               </div>
@@ -547,7 +547,7 @@ export function SlideDocuments() {
   const t = useT();
   const step = useCycle(5, 1500, 1200);
   const chain: { r: Tx; n: string; tm: string }[] = [
-    { r: ["Kadr mütəxəssisi", "HR specialist", "Специалист по кадрам"], n: "Aysel Rəhimova", tm: "09:12" },
+    { r: ["İşçilər üzrə mütəxəssis", "Employee specialist", "Специалист по сотрудникам"], n: "Aysel Rəhimova", tm: "09:12" },
     { r: ["Şöbə müdiri", "Head of department", "Руководитель отдела"], n: "Rauf Əliyev", tm: "10:40" },
     { r: ["Maliyyə direktoru", "Finance director", "Финансовый директор"], n: "Kamran Səfərov", tm: "11:05" },
     { r: ["Baş direktor", "CEO", "Генеральный директор"], n: "Tural Bağırov", tm: "12:30" },
@@ -745,7 +745,7 @@ export function SlideReports() {
   const mgmt: Tx[] = [
     ["Balans", "Balance sheet", "Баланс"],
     ["Mənfəət və zərər", "Profit & loss", "Прибыли и убытки"],
-    ["Kadr və əməkhaqqı", "HR & payroll", "Кадры и зарплата"],
+    ["İşçi və əməkhaqqı", "Employees & payroll", "Сотрудники и зарплата"],
     ["Anbar dövriyyəsi", "Stock turnover", "Оборот склада"],
     ["Satış həcmi", "Sales volume", "Объём продаж"],
     ["Alış və tərəfdaş", "Purchases & partners", "Закупки и партнёры"],
@@ -874,7 +874,7 @@ const PERM_ROWS: [Tx, boolean[]][] = [
   [["Baş mühasib", "Chief accountant", "Главбух"], [true, true, true, true]],
   [["Maliyyə", "Finance", "Финансы"], [true, true, true, false]],
   [["Rəhbər", "Director", "Руководитель"], [true, false, false, false]],
-  [["Kadr", "HR", "Кадры"], [false, false, false, false]],
+  [["İşçi", "Employees", "Сотрудники"], [false, false, false, false]],
   [["Menecer", "Manager", "Менеджер"], [false, false, false, false]],
 ];
 
@@ -1073,7 +1073,7 @@ const DAY: { tm: string; r: Tx; a: Tx; i: IconName; c: string }[] = [
   { tm: "09:00", r: ["Rəhbər", "Director", "Руководитель"], a: ["Panelə baxır: gözləyən təsdiqlər, kassa, açıq borc, anbar və satış.", "Checks the panel: pending approvals, cash, open debts, stock and sales.", "Смотрит панель: согласования, касса, долги, склад и продажи."], i: "eye", c: C.warn },
   { tm: "09:20", r: ["İşçi", "Employee", "Сотрудник"], a: ["Elanı oxuyur, məzuniyyət sorğusu göndərir, tapşırığını yeniləyir.", "Reads the news, requests leave, updates a task.", "Читает объявление, подаёт заявку на отпуск, обновляет задачу."], i: "user", c: C.info },
   { tm: "10:00", r: ["Menecer", "Manager", "Менеджер"], a: ["Sorğunu təsdiqləyir, iş vaxtına baxır, sahədəki işçini yoxlayır.", "Approves the request, checks hours, sees who is in the field.", "Согласует заявку, проверяет время и сотрудников в поле."], i: "users", c: C.brand },
-  { tm: "11:30", r: ["Kadr", "HR", "Кадры"], a: ["Müqaviləni və əmri bağlayır.", "Closes the contract and the order.", "Оформляет договор и приказ."], i: "id", c: C.brand },
+  { tm: "11:30", r: ["İşçi şöbəsi", "Employee team", "Отдел сотрудников"], a: ["Müqaviləni və əmri bağlayır.", "Closes the contract and the order.", "Оформляет договор и приказ."], i: "id", c: C.brand },
   { tm: "13:00", r: ["Mühasib", "Accountant", "Бухгалтер"], a: ["Maaş dövrünü, jurnalı və bank uzlaşmasını görür.", "Reviews payroll, the journal and bank reconciliation.", "Видит расчёт зарплаты, журнал и сверку с банком."], i: "landmark", c: C.ok },
   { tm: "14:30", r: ["Satınalma", "Purchasing", "Закупки"], a: ["Təchizatçı təkliflərini müqayisə edir.", "Compares supplier offers.", "Сравнивает предложения поставщиков."], i: "cart", c: C.info },
   { tm: "15:30", r: ["Anbar", "Warehouse", "Склад"], a: ["Malın gəldiyini qeyd edir.", "Records that goods have arrived.", "Отмечает поступление товара."], i: "box", c: C.info },
@@ -1176,7 +1176,7 @@ export function SlideGains() {
   const small: { t: Tx; d: Tx; i: IconName; c: string }[] = [
     {
       t: ["Nəzarət itirmədən sərbəstlik", "Freedom without losing control", "Свобода без потери контроля"],
-      d: ["Menecer komandanı idarə edir, kadr qaydanı saxlayır, maliyyə rəqəmi bağlayır.", "Managers run teams, HR keeps the rules, finance closes the numbers.", "Менеджер ведёт команду, кадры держат правила, финансы закрывают цифры."],
+      d: ["Menecer komandanı idarə edir, işçi şöbəsi qaydanı saxlayır, maliyyə rəqəmi bağlayır.", "Managers run teams, the employee team keeps the rules, finance closes the numbers.", "Менеджер ведёт команду, отдел сотрудников держит правила, финансы закрывают цифры."],
       i: "shield",
       c: C.brand,
     },
@@ -1193,7 +1193,7 @@ export function SlideGains() {
       c: C.info,
     },
     {
-      t: ["Hazır kadr və müştəri bazası", "Ready talent & client base", "Готовая база кадров и клиентов"],
+      t: ["Hazır işçi və müştəri bazası", "Ready employee & client base", "Готовая база сотрудников и клиентов"],
       d: ["Təcrübə, CV, müştəri və tərəfdaş növbəti qərar üçün yerində qalır.", "Experience, CVs, clients and partners stay ready for the next decision.", "Опыт, резюме, клиенты и партнёры остаются под рукой для следующего решения."],
       i: "layers",
       c: C.ok,

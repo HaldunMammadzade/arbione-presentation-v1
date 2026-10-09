@@ -35,7 +35,7 @@ const RINGS: { r: number; offset: number; chips: Chip[] }[] = [
     r: 180,
     offset: 30,
     chips: [
-      { label: ["Kadr", "HR", "Кадры"], icon: "users", color: C.brand },
+      { label: ["İşçi", "Employees", "Сотрудники"], icon: "users", color: C.brand },
       { label: ["Maliyyə", "Finance", "Финансы"], icon: "landmark", color: C.ok },
       { label: ["Satış", "Sales", "Продажи"], icon: "tag", color: C.info },
     ],
@@ -138,9 +138,9 @@ function Orbit() {
 }
 
 const HERO_LINES: Record<string, string[]> = {
-  az: ["İnsan, iş, pul", "və əməliyyat —", "bir sistemdə."],
-  en: ["People, money,", "work, operations —", "one system."],
-  ru: ["Люди, деньги,", "работа, операции —", "одна система."],
+  az: ["İnsan, iş, pul", "və əməliyyat ", "bir sistemdə."],
+  en: ["People, money,", "work, operations ", "one system."],
+  ru: ["Люди, деньги,", "работа, операции ", "одна система."],
 };
 const HERO_SIZE: Record<string, number> = { az: 104, en: 94, ru: 84 };
 
@@ -165,7 +165,7 @@ export function SlideHero() {
         <R d={0.25} className="mt-14 mb-7 flex items-center gap-4 n:mt-8 n:mb-4">
           <span className="h-[2px] w-12 rounded-full" style={{ background: C.brand }} />
           <span className="text-[17px] font-semibold uppercase tracking-[0.3em] text-ink/55 n:text-[11px] n:tracking-[0.2em]">
-            {t(["Şirkətin idarəetmə sistemi", "Company management system", "Система управления компанией"])}
+            {t(["Biznes idarəetmə sistemi", "Business management system", "Система управления бизнесом"])}
           </span>
         </R>
         <R d={0.35}>
@@ -183,9 +183,9 @@ export function SlideHero() {
         <R d={0.55}>
           <p className="mt-9 text-[25px] leading-[1.55] text-ink/65 max-w-[780px] n:mt-5 n:text-[16px]">
             {t([
-              "Kadrdan maliyyəyə, anbardan müştəriyə qədər bütün şirkət bir paneldə. Hər kəs öz roluna görə eyni mənzərənin ona aid hissəsini görür.",
-              "From HR to finance, from warehouse to client — the whole company in one panel. Everyone sees their own part of the same picture, according to their role.",
-              "От кадров до финансов, от склада до клиента — вся компания в одной панели. Каждый видит свою часть общей картины — согласно своей роли.",
+              "İşçidən maliyyəyə, anbardan müştəriyə qədər bütün şirkət bir paneldə. Hər kəs öz roluna görə eyni mənzərənin ona aid hissəsini görür.",
+              "From employees to finance, from warehouse to client — the whole company in one panel. Everyone sees their own part of the same picture, according to their role.",
+              "От сотрудников до финансов, от склада до клиента — вся компания в одной панели. Каждый видит свою часть общей картины — согласно своей роли.",
             ])}
           </p>
         </R>
@@ -213,7 +213,7 @@ export function SlideHero() {
 /* =============================== 02 · PROBLEM =============================== */
 
 const ISLANDS: { label: Tx; where: Tx; icon: IconName; x: number; y: number; rot: number }[] = [
-  { label: ["Kadr", "HR", "Кадры"], where: ["Excel cədvəli", "Excel sheet", "Таблица Excel"], icon: "users", x: 30, y: 20, rot: -3 },
+  { label: ["İşçi", "Employees", "Сотрудники"], where: ["Excel cədvəli", "Excel sheet", "Таблица Excel"], icon: "users", x: 30, y: 20, rot: -3 },
   { label: ["Davamiyyət", "Attendance", "Табель"], where: ["Ayrıca proqram", "Separate app", "Отдельная программа"], icon: "clock", x: 560, y: 0, rot: 2 },
   { label: ["Əməkhaqqı", "Payroll", "Зарплата"], where: ["Mühasibin kompüteri", "Accountant's PC", "Компьютер бухгалтера"], icon: "wallet", x: 300, y: 235, rot: -2 },
   { label: ["Satış", "Sales", "Продажи"], where: ["Çat mesajları", "Chat messages", "Сообщения в чате"], icon: "tag", x: 0, y: 450, rot: 2 },
@@ -323,9 +323,9 @@ export function SlideProblem() {
         <div className="flex-1 flex flex-col justify-center gap-4 min-w-0">
           <Lead d={0.4} className="!text-[23px] mb-3 n:!text-[15px]">
             {t([
-              "Kadr Excel-də, davamiyyət başqa proqramda, maaş mühasibdə, satış çatda, anbar isə ayrıca dəftərdə qalır.",
-              "HR lives in Excel, attendance in another app, payroll on the accountant's PC, sales in chats and stock in a separate notebook.",
-              "Кадры — в Excel, табель — в другой программе, зарплата — у бухгалтера, продажи — в чатах, склад — в отдельной тетради.",
+              "İşçi məlumatı Excel-də, davamiyyət başqa proqramda, maaş mühasibdə, satış çatda, anbar isə ayrıca dəftərdə qalır.",
+              "Employee records live in Excel, attendance in another app, payroll on the accountant's PC, sales in chats and stock in a separate notebook.",
+              "Данные сотрудников — в Excel, табель — в другой программе, зарплата — у бухгалтера, продажи — в чатах, склад — в отдельной тетради.",
             ])}
           </Lead>
           {pains.map((r, i) => (
@@ -360,7 +360,7 @@ export function SlideProblem() {
 
 const HUB: { l: Tx; i: IconName; c: string }[] = [
   { l: ["Struktur", "Structure", "Структура"], i: "building", c: C.brand },
-  { l: ["Kadr", "HR", "Кадры"], i: "users", c: C.brand },
+  { l: ["İşçi", "Employees", "Сотрудники"], i: "users", c: C.brand },
   { l: ["Davamiyyət", "Attendance", "Табель"], i: "clock", c: C.brand },
   { l: ["Əməkhaqqı", "Payroll", "Зарплата"], i: "wallet", c: C.ok },
   { l: ["Maliyyə", "Finance", "Финансы"], i: "landmark", c: C.ok },
@@ -437,8 +437,8 @@ export function SlideWhatIs() {
         <div className="w-[780px] shrink-0 n:w-full">
           <Eyebrow n="02">{t(["Həll · Arbione nədir", "Solution · What is Arbione", "Решение · Что такое Arbione"])}</Eyebrow>
           <Title size={76}>
-            {t(["Şirkətin gündəlik ", "Your company’s daily ", "Ежедневная "])}
-            <Hl>{t(["idarəetmə sistemi.", "management system.", "система управления компанией."])}</Hl>
+            {t(["Biznesin gündəlik ", "Your business’s daily ", "Ежедневная "])}
+            <Hl>{t(["idarəetmə sistemi.", "management system.", "система управления бизнесом."])}</Hl>
           </Title>
           <Lead className="mt-7 n:mt-4">
             {t([
@@ -628,7 +628,7 @@ export function SlideThreeViews() {
   const t = useT();
   const cols: { who: Tx; scope: Tx; level: 1 | 2 | 3; color: string; icon: IconName; items: Tx[]; d: Tx }[] = [
     {
-      who: ["Rəhbər · Kadr · Maliyyə", "Director · HR · Finance", "Руководитель · Кадры · Финансы"],
+      who: ["Rəhbər · İşçi şöbəsi · Maliyyə", "Director · Employee team · Finance", "Руководитель · Отдел сотрудников · Финансы"],
       scope: ["Bütün şirkəti görür", "Sees the whole company", "Видит всю компанию"],
       level: 3,
       color: C.warn,
@@ -681,9 +681,9 @@ export function SlideThreeViews() {
         ["Təlim", "Training", "Обучение"],
       ],
       d: [
-        "Sorğusunu özü göndərir, statusunu görür — kadra zəng etmədən.",
-        "Sends their own requests and sees the status — no calls to HR.",
-        "Сам отправляет заявки и видит статус — без звонков в отдел кадров.",
+        "Sorğusunu özü göndərir, statusunu görür — işçi şöbəsinə zəng etmədən.",
+        "Sends their own requests and sees the status — without calling the employee team.",
+        "Сам отправляет заявки и видит статус — без звонков в отдел сотрудников.",
       ],
     },
   ];
@@ -864,7 +864,7 @@ export function SlideWriteOnce() {
 
 const STEPS: { t: Tx; tag: Tx; c: string; i: IconName }[] = [
   { t: ["İnsan şirkətə qəbul olunur.", "A person is hired.", "Человека принимают на работу."], tag: ["İşə qəbul", "Hiring", "Найм"], c: C.brand, i: "briefcase" },
-  { t: ["Vəzifəsi, şöbəsi və müqaviləsi qeydə alınır.", "Position, department and contract are recorded.", "Фиксируются должность, отдел и договор."], tag: ["Kadr", "HR", "Кадры"], c: C.brand, i: "id" },
+  { t: ["Vəzifəsi, şöbəsi və müqaviləsi qeydə alınır.", "Position, department and contract are recorded.", "Фиксируются должность, отдел и договор."], tag: ["İşçi", "Employees", "Сотрудники"], c: C.brand, i: "id" },
   { t: ["İşə gəlişi, məzuniyyəti və izahatı izlənir.", "Attendance, leave and explanations are tracked.", "Учитываются приходы, отпуска и объяснительные."], tag: ["Davamiyyət", "Attendance", "Табель"], c: C.brand, i: "clock" },
   { t: ["Maaş bu məlumatla hesablanır və maliyyə təsdiqinə düşür.", "Salary is calculated from this data and sent for approval.", "Зарплата считается по этим данным и уходит на утверждение."], tag: ["Əməkhaqqı", "Payroll", "Зарплата"], c: C.ok, i: "wallet" },
   { t: ["Alış, anbar və satış eyni məhsul və tərəfdaş kartı ilə gedir.", "Purchasing, stock and sales share one product and partner card.", "Закупки, склад и продажи работают с одной карточкой товара и партнёра."], tag: ["Mal axını", "Goods flow", "Товарный поток"], c: C.info, i: "box" },

@@ -19,7 +19,7 @@ export const DECK: DeckSlide[] = [
   { C: SlideFlow, name: ["Bir axın", "One flow", "Единый поток"], tag: "platform", icon: "flow", color: C.brand },
   { C: SlideModules, name: ["17 modul", "17 modules", "17 модулей"], tag: "modules", icon: "layout", color: C.brand },
   { C: SlideDashboard, name: ["İdarə paneli", "Dashboard", "Панель"], tag: "modules", icon: "chart", color: C.warn },
-  { C: SlideStructure, name: ["Struktur və işçilər", "Structure & staff", "Структура и кадры"], tag: "modules", icon: "building", color: C.brand },
+  { C: SlideStructure, name: ["Struktur və işçilər", "Structure & employees", "Структура и сотрудники"], tag: "modules", icon: "building", color: C.brand },
   { C: SlideAttendance, name: ["Davamiyyət və GPS", "Attendance & GPS", "Табель и GPS"], tag: "modules", icon: "clock", color: C.brand },
   { C: SlidePayroll, name: ["Əməkhaqqı", "Payroll", "Зарплата"], tag: "modules", icon: "wallet", color: C.brand },
   { C: SlideTalent, name: ["İstedad", "Talent", "Таланты"], tag: "modules", icon: "graduation", color: C.brand },
