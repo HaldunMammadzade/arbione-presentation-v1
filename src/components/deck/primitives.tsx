@@ -1,5 +1,5 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import {
   createContext,
   useCallback,
@@ -92,6 +92,10 @@ export type Mode = { narrow: boolean; scale: number };
 const NarrowCtx = createContext(false);
 export const useNarrow = () => useContext(NarrowCtx);
 
+/** Print/export: every slide renders in its final, fully-built state. */
+const StaticCtx = createContext(false);
+export const useStatic = () => useContext(StaticCtx);
+
 export function useMode(): Mode | null {
   const [m, setM] = useState<Mode | null>(null);
   useEffect(() => {
@@ -117,7 +121,16 @@ export function Stage({ children, mode }: { children: ReactNode; mode: Mode | "p
       </NarrowCtx.Provider>
     );
   }
-  const scale = mode === "print" ? 1 : mode.scale;
+  if (mode === "print") {
+    return (
+      <StaticCtx.Provider value>
+        <MotionConfig skipAnimations>
+          <div className="absolute inset-0">{children}</div>
+        </MotionConfig>
+      </StaticCtx.Provider>
+    );
+  }
+  const scale = mode.scale;
   return (
     <div className="absolute inset-0 flex items-center justify-center">
       <div className="relative shrink-0" style={{ width: STAGE_W, height: STAGE_H, transform: `scale(${scale})`, transformOrigin: "center center" }}>
@@ -189,6 +202,14 @@ export function R({
   className?: string;
   style?: CSSProperties;
 }) {
+  const still = useStatic();
+  if (still) {
+    return (
+      <div className={className} style={style}>
+        {children}
+      </div>
+    );
+  }
   return (
     <motion.div
       initial={{ opacity: 0, y, x, filter: "blur(8px)" }}
@@ -409,8 +430,10 @@ export function fmt(n: number, dec = 0) {
 }
 
 export function Counter({ to, d = 0, dur = 1.6, format = (n: number) => fmt(n) }: { to: number; d?: number; dur?: number; format?: (n: number) => string }) {
-  const [v, setV] = useState(0);
+  const still = useStatic();
+  const [v, setV] = useState(still ? to : 0);
   useEffect(() => {
+    if (still) return;
     let raf = 0;
     let start = 0;
     const timer = setTimeout(() => {
@@ -426,13 +449,16 @@ export function Counter({ to, d = 0, dur = 1.6, format = (n: number) => fmt(n) }
       clearTimeout(timer);
       cancelAnimationFrame(raf);
     };
-  }, [to, d, dur]);
+  }, [to, d, dur, still]);
   return <>{format(v)}</>;
 }
 
+/** Steps through 0..n-1; in print it rests on the last (completed) step. */
 export function useCycle(n: number, ms = 1800, delay = 0) {
-  const [i, setI] = useState(0);
+  const still = useStatic();
+  const [i, setI] = useState(still ? n - 1 : 0);
   useEffect(() => {
+    if (still) return;
     let id: ReturnType<typeof setInterval>;
     const t = setTimeout(() => {
       id = setInterval(() => setI((p) => (p + 1) % n), ms);
@@ -441,7 +467,7 @@ export function useCycle(n: number, ms = 1800, delay = 0) {
       clearTimeout(t);
       clearInterval(id);
     };
-  }, [n, ms, delay]);
+  }, [n, ms, delay, still]);
   return i;
 }
 

@@ -115,16 +115,47 @@ body { position: fixed; inset: 0; }
   100% { transform: translateX(320%) skewX(-18deg); }
 }
 
+/* ---------- PDF / print view ---------- */
+html.print-mode,
+html.print-mode body { position: static; height: auto; overflow-x: hidden; overflow-y: auto; }
+html.print-mode body { background: #e9e9f1; }
+.print-sheet {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgb(28 26 60 / 0.06), 0 40px 90px -40px rgb(28 26 60 / 0.45);
+}
+.print-slide [style*="sheen"] { display: none; }
+
 @media print {
-  @page { size: 1920px 1080px landscape; margin: 0; }
+  @page { size: 1920px 1080px; margin: 0; }
+  :root, .dark {
+    --ink: 38 36 58;
+    --card: 255 255 255;
+    --canvas: 246 246 250;
+    --hl: 104 92 232;
+    --shadow: 28 26 60;
+    --grid: 38 36 58;
+    color-scheme: light;
+  }
   html, body {
     position: static !important;
     width: 1920px !important;
     height: auto !important;
     overflow: visible !important;
+    background: #fff !important;
     -webkit-print-color-adjust: exact !important;
     print-color-adjust: exact !important;
   }
-  .no-print { display: none !important; }
-  .print-slide { page-break-after: always !important; break-after: page !important; overflow: hidden !important; }
+  .no-print, nextjs-portal { display: none !important; }
+  .print-stack { display: block !important; padding: 0 !important; }
+  .print-item { display: block !important; }
+  .print-sheet {
+    zoom: 1 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    break-after: page;
+    page-break-after: always;
+  }
+  .print-item:last-child .print-sheet { break-after: auto; page-break-after: auto; }
+  .print-slide *, .print-slide *::before, .print-slide *::after { animation: none !important; transition: none !important; }
 }
