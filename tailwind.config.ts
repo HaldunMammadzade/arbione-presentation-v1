@@ -1,34 +1,33 @@
 import type { Config } from "tailwindcss";
+import plugin from "tailwindcss/plugin";
+
+const v = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
 
 const config: Config = {
-  content: [
-    "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./src/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  darkMode: "class",
+  content: ["./src/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
       colors: {
-        primary: {
-          DEFAULT: "#6366f1",
-          light: "#818cf8",
-          dark: "#4f46e5",
-        },
-        accent: {
-          DEFAULT: "#a78bfa",
-          cyan: "#22d3ee",
-        },
+        ink: v("ink"),
+        card: v("card"),
+        canvas: v("canvas"),
+        hl: v("hl"),
+        brand: "#7367F0",
+        primary: { DEFAULT: "#7367F0", light: "#9e95f5", dark: "#5e50ee" },
+        accent: { DEFAULT: "#7367F0", cyan: "#00BAD1" },
       },
       fontFamily: {
         sans: ["Inter", "sans-serif"],
-      },
-      animation: {
-        float: "float 6s ease-in-out infinite",
-        "pulse-ring": "pulse-ring 2s ease-out infinite",
+        display: ["'Inter Tight'", "Inter", "sans-serif"],
+        mono: ["'JetBrains Mono'", "ui-monospace", "monospace"],
       },
     },
   },
-  plugins: [],
+  plugins: [
+    plugin(({ addVariant }) => {
+      addVariant("n", ".narrow &");
+    }),
+  ],
 };
 export default config;

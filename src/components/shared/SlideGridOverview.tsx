@@ -1,53 +1,29 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useLocale } from "@/contexts/LocaleContext";
+import { DECK, DECK_TAGS, type DeckTag } from "@/components/deck";
+import { Icon, useT } from "@/components/deck/primitives";
 
 interface Props {
   isOpen: boolean;
   onClose: () => void;
   currentSlide: number;
   onSelectSlide: (index: number) => void;
-  totalSlides: number;
 }
 
-const ICONS = ["🚀","✨","⚡","💎","❓","🌪️","⚠️","📖","🎨","🌐","🔍","📦","🧩","👥","📍","✓","📊","📱","⚡","🎯","🌟","📊","💳","🔥","🤝","📱"];
+export default function SlideGridOverview({ isOpen, onClose, currentSlide, onSelectSlide }: Props) {
+  const t = useT();
+  const [filter, setFilter] = useState<DeckTag | "all">("all");
 
-export default function SlideGridOverview({
-  isOpen,
-  onClose,
-  currentSlide,
-  onSelectSlide,
-  totalSlides,
-}: Props) {
-  const { t } = useLocale();
-  const [filter, setFilter] = useState<string>("");
-
-  // Keyboard shortcut listener
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isOpen) {
-        onClose();
-      }
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isOpen) onClose();
     };
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
   }, [isOpen, onClose]);
 
-  const categories = t.nav.gridCategories;
-
-  const slideMetadata = t.nav.gridSlides.map((s: { title: string; tag: string }, i: number) => ({
-    id: i,
-    title: s.title,
-    tag: s.tag,
-    icon: ICONS[i] || "📄",
-  }));
-
-  const filteredSlides = slideMetadata.filter((s: { id: number; tag: string }) => {
-    if (s.id >= totalSlides) return false;
-    if (!filter || filter === categories[0]) return true;
-    return s.tag.toLowerCase().includes(filter.toLowerCase());
-  });
+  const slides = DECK.map((s, i) => ({ ...s, i })).filter((s) => filter === "all" || s.tag === filter);
 
   return (
     <AnimatePresence>
@@ -56,126 +32,78 @@ export default function SlideGridOverview({
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 0.25 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center p-6 md:p-10 backdrop-blur-2xl bg-black/85"
+          transition={{ duration: 0.2 }}
+          className="fixed inset-0 z-[100] flex items-center justify-center p-3 sm:p-10 bg-canvas/70 backdrop-blur-2xl"
           onClick={onClose}
         >
           <motion.div
-            initial={{ scale: 0.92, opacity: 0, y: 20 }}
+            initial={{ scale: 0.96, opacity: 0, y: 16 }}
             animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.92, opacity: 0, y: 20 }}
-            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="relative w-full max-w-6xl max-h-[88vh] rounded-3xl glass-strong border border-white/20 p-6 md:p-8 flex flex-col overflow-hidden shadow-2xl"
+            exit={{ scale: 0.96, opacity: 0, y: 16 }}
+            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="relative w-full max-w-6xl max-h-[90vh] rounded-3xl surface-raised p-4 sm:p-8 flex flex-col overflow-hidden"
             onClick={(e) => e.stopPropagation()}
-            style={{
-              background: "linear-gradient(135deg, rgba(15,16,35,0.95), rgba(6,7,26,0.98))",
-              boxShadow: "0 25px 80px rgba(0,0,0,0.8), 0 0 50px rgba(99,102,241,0.2)",
-            }}
           >
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6 pb-4 border-b border-white/10">
+            <div className="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-ink/[0.08]">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-primary to-accent flex items-center justify-center text-lg shadow-lg shadow-primary/30">
-                  🗂️
+                <div className="w-10 h-10 rounded-xl bg-brand text-white flex items-center justify-center">
+                  <Icon name="layout" size={18} />
                 </div>
                 <div>
-                  <h2 className="text-xl font-black text-white tracking-tight flex items-center gap-2">
-                    {t.nav.galleryTitle}
-                    <span className="text-xs px-2.5 py-0.5 rounded-full bg-primary/20 text-primary-light border border-primary/30 font-bold">
-                      {totalSlides} {t.nav.slideCount}
-                    </span>
-                  </h2>
-                  <p className="text-xs text-white/50">
-                    {t.nav.gallerySubtitle}
+                  <h2 className="text-lg font-semibold text-ink tracking-tight">{t(["Bütün slaydlar", "All slides", "Все слайды"])}</h2>
+                  <p className="text-xs text-ink/50">
+                    {DECK.length} {t(["slayd · G ilə aç/bağla", "slides · toggle with G", "слайдов · G — открыть/закрыть"])}
                   </p>
                 </div>
               </div>
-
-              {/* Filter pills & Close button */}
-              <div className="flex items-center gap-3">
-                <div className="hidden sm:flex items-center gap-1.5 p-1 rounded-xl bg-white/5 border border-white/10">
-                  {categories.map((cat: string) => (
+              <div className="flex items-center gap-2">
+                <div className="flex items-center gap-1 p-1 rounded-xl well overflow-x-auto max-w-[70vw]">
+                  {DECK_TAGS.map((c) => (
                     <button
-                      key={cat}
-                      onClick={() => setFilter(cat)}
-                      className={`px-3 py-1 rounded-lg text-xs font-bold transition-all ${
-                        (!filter && cat === categories[0]) || filter === cat
-                          ? "bg-primary text-white shadow-md shadow-primary/40"
-                          : "text-white/60 hover:text-white"
-                      }`}
+                      key={c.id}
+                      onClick={() => setFilter(c.id)}
+                      className={`px-3 py-1 rounded-lg text-xs font-semibold whitespace-nowrap transition-colors ${filter === c.id ? "bg-brand text-white" : "text-ink/60 hover:text-ink"}`}
                     >
-                      {cat}
+                      {t(c.name)}
                     </button>
                   ))}
                 </div>
-
-                <button
-                  onClick={onClose}
-                  className="w-9 h-9 rounded-xl bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all"
-                >
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                  </svg>
+                <button onClick={onClose} className="w-9 h-9 rounded-xl well text-ink/70 hover:text-ink flex items-center justify-center" aria-label="Close">
+                  <Icon name="x" size={18} stroke={2.2} />
                 </button>
               </div>
             </div>
 
-            {/* Grid Container */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3.5 overflow-y-auto pr-2 custom-scrollbar">
-              {filteredSlides.map((slide: { id: number; title: string; tag: string; icon: string }) => {
-                const isActive = slide.id === currentSlide;
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 overflow-y-auto pr-1">
+              {slides.map((s) => {
+                const active = s.i === currentSlide;
                 return (
                   <motion.button
-                    key={slide.id}
+                    key={s.i}
                     onClick={() => {
-                      onSelectSlide(slide.id);
+                      onSelectSlide(s.i);
                       onClose();
                     }}
-                    whileHover={{ scale: 1.04, y: -3 }}
+                    whileHover={{ y: -3 }}
                     whileTap={{ scale: 0.97 }}
-                    className={`relative text-left rounded-2xl p-3.5 flex flex-col justify-between transition-all group overflow-hidden ${
-                      isActive
-                        ? "bg-primary/25 border-2 border-primary shadow-xl shadow-primary/30"
-                        : "glass hover:border-primary/40 border border-white/10"
-                    }`}
-                    style={{ minHeight: "115px" }}
+                    className={`group relative text-left rounded-2xl p-3.5 min-h-[124px] flex flex-col justify-between gap-3 transition-colors ${active ? "bg-brand text-white" : "well hover:bg-ink/[0.06]"}`}
                   >
-                    {/* Background glow on active/hover */}
-                    <div
-                      className={`absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/10 transition-opacity ${
-                        isActive ? "opacity-100" : "opacity-0 group-hover:opacity-100"
-                      }`}
-                    />
-
-                    {/* Top Row: Index & Tag */}
-                    <div className="relative z-10 flex items-center justify-between mb-2">
+                    <div className="flex items-start justify-between">
                       <span
-                        className={`text-xs font-black px-2 py-0.5 rounded-lg ${
-                          isActive
-                            ? "bg-primary text-white shadow-sm"
-                            : "bg-white/10 text-white/70 group-hover:text-white"
-                        }`}
+                        className="w-10 h-10 rounded-xl flex items-center justify-center transition-transform group-hover:scale-105"
+                        style={
+                          active
+                            ? { background: "rgba(255,255,255,0.16)", color: "#fff", boxShadow: "inset 0 0 0 1px rgba(255,255,255,0.25)" }
+                            : { background: `linear-gradient(150deg, ${s.color}26, ${s.color}0d)`, color: s.color, boxShadow: `inset 0 0 0 1px ${s.color}33` }
+                        }
                       >
-                        {String(slide.id + 1).padStart(2, "0")}
+                        <Icon name={s.icon} size={20} />
                       </span>
-                      <span className="text-base">{slide.icon}</span>
+                      <span className={`font-mono text-[11px] font-semibold ${active ? "text-white/75" : "text-ink/35"}`}>{String(s.i + 1).padStart(2, "0")}</span>
                     </div>
-
-                    {/* Bottom Row: Title & Active Indicator */}
-                    <div className="relative z-10">
-                      <div className="text-white font-bold text-xs leading-snug line-clamp-2 mb-1 group-hover:text-primary-light transition-colors">
-                        {slide.title}
-                      </div>
-                      <div className="flex items-center justify-between text-[10px]">
-                        <span className="text-white/40 font-medium">{slide.tag}</span>
-                        {isActive && (
-                          <span className="text-emerald-400 font-bold flex items-center gap-1">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                            {t.nav.active}
-                          </span>
-                        )}
-                      </div>
+                    <div>
+                      <div className={`font-semibold text-[13px] leading-snug ${active ? "" : "text-ink"}`}>{t(s.name)}</div>
+                      <div className={`text-[10px] uppercase tracking-wider mt-1 ${active ? "text-white/70" : "text-ink/40"}`}>{t(DECK_TAGS.find((c) => c.id === s.tag)!.name)}</div>
                     </div>
                   </motion.button>
                 );
