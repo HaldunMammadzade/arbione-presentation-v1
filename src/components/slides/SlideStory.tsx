@@ -136,7 +136,7 @@ function FakeEmployeePortalUI() {
       <div className="flex h-full">
         {/* ── Sidebar ── */}
         <div className="w-[145px] flex-shrink-0 flex flex-col border-r transition-colors duration-300" style={{ background: theme.sidebarBg, borderColor: theme.border }}>
-          {/* Logo */}
+          
           <div className="px-3 py-2.5 flex items-center border-b transition-colors duration-300" style={{ borderColor: theme.border }}>
             <ArbioneLogo height={22} className={`transition-colors duration-300 ${isDarkMode ? "text-white" : "text-gray-900"}`} />
           </div>
