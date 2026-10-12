@@ -12,9 +12,27 @@ export const viewport: Viewport = {
   ],
 };
 
+const title = "Arbione — Biznes idarəetmə sistemi";
+const description = "İnsan, iş, pul və əməliyyat — bir sistemdə.";
+
 export const metadata: Metadata = {
-  title: "Arbione — Biznes idarəetmə sistemi",
-  description: "Arbione şirkətin insanını, işini, pulunu və əməliyyatını bir yerdə idarə edən sistemdir.",
+  metadataBase: new URL("https://presentation.arbione.az"),
+  title,
+  description,
+  applicationName: "Arbione",
+  openGraph: {
+    title,
+    description,
+    url: "https://presentation.arbione.az",
+    siteName: "Arbione",
+    locale: "az_AZ",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 const themeInit = `try{if(localStorage.getItem('arb-theme')==='dark')document.documentElement.classList.add('dark')}catch(e){}`;
