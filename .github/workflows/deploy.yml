@@ -1,0 +1,102 @@
+name: CI and deploy to server
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - murad
+  pull_request:
+    branches:
+      - main
+      - master
+      - murad
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Check production build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build application
+        run: npm run build
+
+  deploy:
+    name: Build and restart app
+    needs: build
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    concurrency:
+      group: deploy-presentation-server
+      cancel-in-progress: false
+    steps:
+      - name: Deploy over SSH
+        uses: appleboy/ssh-action@v1
+        env:
+          APP_DIR: ${{ secrets.APP_DIR }}
+          APP_BRANCH: ${{ github.ref_name }}
+          APP_COMMIT: ${{ github.sha }}
+          APP_NAME: ${{ secrets.APP_NAME || 'arbione-presentation' }}
+          APP_PORT: ${{ secrets.APP_PORT || '3006' }}
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          port: ${{ secrets.SERVER_PORT || 22 }}
+          command_timeout: 20m
+          envs: APP_DIR,APP_BRANCH,APP_COMMIT,APP_NAME,APP_PORT
+          script: |
+            set -eu
+
+            if [ -z "$APP_DIR" ]; then
+              echo "APP_DIR secret is required."
+              exit 1
+            fi
+
+            for tool in git node npm pm2; do
+              if ! command -v "$tool" >/dev/null 2>&1; then
+                echo "$tool is required on the deployment server."
+                exit 1
+              fi
+            done
+
+            cd "$APP_DIR"
+
+            git fetch origin "$APP_BRANCH"
+            git checkout "$APP_BRANCH"
+            git pull --ff-only origin "$APP_BRANCH"
+
+            if [ "$(git rev-parse HEAD)" != "$APP_COMMIT" ]; then
+              echo "Branch has advanced; skipping deployment of an unverified commit."
+              exit 0
+            fi
+
+            npm ci --include=dev
+            npm run build
+            export NODE_ENV=production
+            export PORT="$APP_PORT"
+
+            if pm2 describe "$APP_NAME" >/dev/null 2>&1; then
+              pm2 reload "$APP_NAME" --update-env
+            else
+              pm2 start npm --name "$APP_NAME" -- start
+            fi
+
+            pm2 save
