@@ -61,6 +61,7 @@ const RINGS: { r: number; offset: number; chips: Chip[] }[] = [
       { label: ["İşə qəbul", "Hiring", "Найм"], icon: "briefcase", color: C.brand },
       { label: ["Kassa və bank", "Cash & bank", "Касса и банк"], icon: "coins", color: C.ok },
       { label: ["Performans", "Performance", "KPI"], icon: "target", color: C.brand },
+      { label: ["İstehsalat", "Manufacturing", "Производство"], icon: "factory", color: C.info },
       { label: ["Hesabat", "Reports", "Отчёты"], icon: "report", color: C.warn },
     ],
   },
@@ -150,7 +151,7 @@ export function SlideHero() {
   const narrow = useNarrow();
   const lines = HERO_LINES[lang];
   const stats: { v: string; l: Tx }[] = [
-    { v: "17", l: ["modul", "modules", "модулей"] },
+    { v: "20", l: ["modul", "modules", "модулей"] },
     { v: "3", l: ["kabinet", "cabinets", "кабинета"] },
     { v: "1", l: ["vahid baza", "single database", "единая база"] },
     { v: "3", l: ["platforma", "platforms", "платформы"] },
@@ -183,9 +184,9 @@ export function SlideHero() {
         <R d={0.55}>
           <p className="mt-9 text-[25px] leading-[1.55] text-ink/65 max-w-[780px] n:mt-5 n:text-[16px]">
             {t([
-              "İşçidən maliyyəyə, anbardan müştəriyə qədər bütün şirkət bir paneldə. Hər kəs öz roluna görə eyni mənzərənin ona aid hissəsini görür.",
-              "From employees to finance, from warehouse to client — the whole company in one panel. Everyone sees their own part of the same picture, according to their role.",
-              "От сотрудников до финансов, от склада до клиента — вся компания в одной панели. Каждый видит свою часть общей картины — согласно своей роли.",
+              "İşçidən maliyyəyə, anbardan istehsala və müştəriyə qədər bütün şirkət bir paneldə. Hər kəs öz roluna görə eyni mənzərənin ona aid hissəsini görür.",
+              "From employees to finance, from warehouse to production and client — the whole company in one panel. Everyone sees their own part of the same picture, according to their role.",
+              "От сотрудников до финансов, от склада до производства и клиента — вся компания в одной панели. Каждый видит свою часть общей картины — согласно своей роли.",
             ])}
           </p>
         </R>
@@ -213,19 +214,21 @@ export function SlideHero() {
 /* =============================== 02 · PROBLEM =============================== */
 
 const ISLANDS: { label: Tx; where: Tx; icon: IconName; x: number; y: number; rot: number }[] = [
-  { label: ["İşçi", "Employees", "Сотрудники"], where: ["Excel cədvəli", "Excel sheet", "Таблица Excel"], icon: "users", x: 30, y: 20, rot: -3 },
-  { label: ["Davamiyyət", "Attendance", "Табель"], where: ["Ayrıca proqram", "Separate app", "Отдельная программа"], icon: "clock", x: 560, y: 0, rot: 2 },
-  { label: ["Əməkhaqqı", "Payroll", "Зарплата"], where: ["Mühasibin kompüteri", "Accountant's PC", "Компьютер бухгалтера"], icon: "wallet", x: 300, y: 235, rot: -2 },
-  { label: ["Satış", "Sales", "Продажи"], where: ["Çat mesajları", "Chat messages", "Сообщения в чате"], icon: "tag", x: 0, y: 450, rot: 2 },
-  { label: ["Anbar", "Warehouse", "Склад"], where: ["Ayrıca dəftər", "Paper notebook", "Отдельная тетрадь"], icon: "box", x: 590, y: 430, rot: -2 },
+  { label: ["İşçi", "Employees", "Сотрудники"], where: ["Excel cədvəli", "Excel sheet", "Таблица Excel"], icon: "users", x: 20, y: 8, rot: -3 },
+  { label: ["Davamiyyət", "Attendance", "Табель"], where: ["Ayrıca proqram", "Separate app", "Отдельная программа"], icon: "clock", x: 540, y: 0, rot: 2 },
+  { label: ["Əməkhaqqı", "Payroll", "Зарплата"], where: ["Mühasibin kompüteri", "Accountant's PC", "Компьютер бухгалтера"], icon: "wallet", x: 20, y: 190, rot: -2 },
+  { label: ["Satış", "Sales", "Продажи"], where: ["Çat mesajları", "Chat messages", "Сообщения в чате"], icon: "tag", x: 540, y: 180, rot: 2 },
+  { label: ["Anbar", "Warehouse", "Склад"], where: ["Ayrıca dəftər", "Paper notebook", "Отдельная тетрадь"], icon: "box", x: 20, y: 380, rot: -2 },
+  { label: ["İstehsalat", "Manufacturing", "Производство"], where: ["Kağız iş əmri", "Paper work order", "Бумажный наряд"], icon: "factory", x: 540, y: 370, rot: 1 },
 ];
 const LINKS = [
   [0, 1],
   [0, 2],
-  [1, 2],
-  [2, 3],
+  [1, 3],
   [2, 4],
-  [3, 4],
+  [3, 5],
+  [4, 5],
+  [2, 3],
 ];
 
 function IslandCard({ it, h }: { it: (typeof ISLANDS)[number]; h?: number }) {
@@ -259,13 +262,13 @@ export function SlideProblem() {
       </Eyebrow>
       <Title>
         {t(["Bir şirkət. ", "One company. ", "Одна компания. "])}
-        <Hl color={C.warn}>{t(["Beş ayrı dünya.", "Five separate worlds.", "Пять разных миров."])}</Hl>
+        <Hl color={C.warn}>{t(["Altı ayrı dünya.", "Six separate worlds.", "Шесть разных миров."])}</Hl>
       </Title>
       <div className="flex-1 flex gap-16 mt-12 min-h-0 n:flex-col n:gap-6 n:mt-6">
         {narrow ? (
           <div className="grid grid-cols-2 gap-3">
             {ISLANDS.map((it, i) => (
-              <R key={i} d={0.2 + i * 0.08} className={i === 4 ? "col-span-2" : ""}>
+              <R key={i} d={0.2 + i * 0.08}>
                 <IslandCard it={it} />
               </R>
             ))}
@@ -323,9 +326,9 @@ export function SlideProblem() {
         <div className="flex-1 flex flex-col justify-center gap-4 min-w-0">
           <Lead d={0.4} className="!text-[23px] mb-3 n:!text-[15px]">
             {t([
-              "İşçi məlumatı Excel-də, davamiyyət başqa proqramda, maaş mühasibdə, satış çatda, anbar isə ayrıca dəftərdə qalır.",
-              "Employee records live in Excel, attendance in another app, payroll on the accountant's PC, sales in chats and stock in a separate notebook.",
-              "Данные сотрудников — в Excel, табель — в другой программе, зарплата — у бухгалтера, продажи — в чатах, склад — в отдельной тетради.",
+              "İşçi məlumatı Excel-də, davamiyyət başqa proqramda, maaş mühasibdə, satış çatda, anbar ayrıca dəftərdə, istehsal isə kağız iş əmrində qalır.",
+              "Employee records live in Excel, attendance in another app, payroll on the accountant's PC, sales in chats, stock in a notebook and production on paper work orders.",
+              "Данные сотрудников — в Excel, табель — в другой программе, зарплата — у бухгалтера, продажи — в чатах, склад — в тетради, производство — в бумажных нарядах.",
             ])}
           </Lead>
           {pains.map((r, i) => (
@@ -366,11 +369,11 @@ const HUB: { l: Tx; i: IconName; c: string }[] = [
   { l: ["Maliyyə", "Finance", "Финансы"], i: "landmark", c: C.ok },
   { l: ["Satınalma", "Purchasing", "Закупки"], i: "cart", c: C.info },
   { l: ["Anbar", "Warehouse", "Склад"], i: "box", c: C.info },
+  { l: ["İstehsalat", "Manufacturing", "Производство"], i: "factory", c: C.info },
   { l: ["Satış", "Sales", "Продажи"], i: "tag", c: C.info },
-  { l: ["Müştəri", "Clients", "Клиенты"], i: "handshake", c: C.info },
+  { l: ["Xəzinə", "Treasury", "Казначейство"], i: "bank", c: C.ok },
+  { l: ["Vergi", "Tax", "Налоги"], i: "percent", c: C.warn },
   { l: ["Sənəd", "Documents", "Документы"], i: "sign", c: C.warn },
-  { l: ["Hesabat", "Reports", "Отчёты"], i: "report", c: C.warn },
-  { l: ["GPS", "GPS", "GPS"], i: "map", c: C.brand },
 ];
 
 function HubDiagram() {
@@ -442,9 +445,9 @@ export function SlideWhatIs() {
           </Title>
           <Lead className="mt-7 n:mt-4">
             {t([
-              "Şirkət strukturundan işçinin məzuniyyətinə, sahədəki hərəkətindən maaş hesabına, alış-satışdan rəhbərin təsdiqinə qədər — bütün proseslər bir paneldə.",
-              "From company structure to an employee’s leave, from field movement to payroll, from purchasing and sales to the director’s approval — every process in one panel.",
-              "От структуры компании до отпуска сотрудника, от перемещений в поле до расчёта зарплаты, от закупок и продаж до визы руководителя — все процессы в одной панели.",
+              "Şirkət strukturundan işçinin məzuniyyətinə, sahədəki hərəkətindən maaş hesabına, alış-satışa, anbara, istehsal sifarişinə, vergi hesabatına və rəhbərin təsdiqinə qədər — bütün proseslər bir paneldə.",
+              "From company structure to leave, field movement, payroll, purchasing and sales, warehouse, production orders, tax reports and the director’s approval — every process in one panel.",
+              "От структуры компании до отпуска, полевых перемещений, зарплаты, закупок и продаж, склада, производственного заказа, налоговых отчётов и визы руководителя — все процессы в одной панели.",
             ])}
           </Lead>
           <R d={0.35} className="mt-9 n:mt-5">
@@ -636,15 +639,15 @@ export function SlideThreeViews() {
       items: [
         ["Struktur", "Structure", "Структура"],
         ["İşçilər", "Employees", "Сотрудники"],
-        ["Qaydalar", "Rules", "Правила"],
         ["Pul", "Money", "Деньги"],
         ["Anbar", "Stock", "Склад"],
+        ["İstehsalat", "Production", "Производство"],
         ["Hesabat", "Reports", "Отчёты"],
       ],
       d: [
-        "Şirkətin tam şəkli: kim harada işləyir, hansı qayda keçərlidir, pul və mal haradadır.",
-        "The full picture: who works where, which rules apply, where the money and goods are.",
-        "Полная картина: кто где работает, какие правила действуют, где деньги и товар.",
+        "Şirkətin tam şəkli: kim harada işləyir, hansı qayda keçərlidir, pul, mal və istehsal haradadır.",
+        "The full picture: who works where, which rules apply, where money, goods and production stand.",
+        "Полная картина: кто где работает, какие правила действуют, где деньги, товар и производство.",
       ],
     },
     {
@@ -867,10 +870,12 @@ const STEPS: { t: Tx; tag: Tx; c: string; i: IconName }[] = [
   { t: ["Vəzifəsi, şöbəsi və müqaviləsi qeydə alınır.", "Position, department and contract are recorded.", "Фиксируются должность, отдел и договор."], tag: ["İşçi", "Employees", "Сотрудники"], c: C.brand, i: "id" },
   { t: ["İşə gəlişi, məzuniyyəti və izahatı izlənir.", "Attendance, leave and explanations are tracked.", "Учитываются приходы, отпуска и объяснительные."], tag: ["Davamiyyət", "Attendance", "Табель"], c: C.brand, i: "clock" },
   { t: ["Maaş bu məlumatla hesablanır və maliyyə təsdiqinə düşür.", "Salary is calculated from this data and sent for approval.", "Зарплата считается по этим данным и уходит на утверждение."], tag: ["Əməkhaqqı", "Payroll", "Зарплата"], c: C.ok, i: "wallet" },
-  { t: ["Alış, anbar və satış eyni məhsul və tərəfdaş kartı ilə gedir.", "Purchasing, stock and sales share one product and partner card.", "Закупки, склад и продажи работают с одной карточкой товара и партнёра."], tag: ["Mal axını", "Goods flow", "Товарный поток"], c: C.info, i: "box" },
-  { t: ["Pul hərəkəti, jurnal və hesabat bir-birinə bağlanır.", "Cash flow, journal and reports are linked together.", "Движение денег, журнал и отчёты связаны между собой."], tag: ["Maliyyə", "Finance", "Финансы"], c: C.ok, i: "landmark" },
+  { t: ["Alış, anbar, istehsal və satış eyni məhsul kartı ilə gedir.", "Purchasing, stock, production and sales share one product card.", "Закупки, склад, производство и продажи — одна карточка товара."], tag: ["Mal axını", "Goods flow", "Товарный поток"], c: C.info, i: "box" },
+  { t: ["Material sexə buraxılır, hazır məhsul anbara düşür, maya maliyyəyə bağlanır.", "Material issues to the shop, finished goods to stock, cost to finance.", "Материал — в цех, готовая продукция — на склад, себестоимость — в финансы."], tag: ["İstehsalat", "Manufacturing", "Производство"], c: C.info, i: "factory" },
+  { t: ["Pul hərəkəti, jurnal, xəzinə və hesabat bir-birinə bağlanır.", "Cash flow, journal, treasury and reports are linked together.", "Движение денег, журнал, казначейство и отчёты связаны."], tag: ["Maliyyə", "Finance", "Финансы"], c: C.ok, i: "landmark" },
   { t: ["Əmr və təsdiq rəqəmsal imza zənciri ilə gedir.", "Orders and approvals move through a digital signing chain.", "Приказы и согласования идут по цифровой цепочке подписей."], tag: ["Sənəd", "Documents", "Документы"], c: C.warn, i: "sign" },
-  { t: ["Rəhbər eyni gündə işi, pulu və nəticəni görür.", "The director sees work, money and results the same day.", "Руководитель в тот же день видит работу, деньги и результат."], tag: ["Nəticə", "Result", "Результат"], c: C.brand, i: "chart" },
+  { t: ["Vergi və uyğunluq hesabatları gündəlik əməliyyatdan yığılır.", "Tax and compliance reports assemble from daily operations.", "Налоговые отчёты собираются из ежедневных операций."], tag: ["Vergi", "Tax", "Налоги"], c: C.warn, i: "percent" },
+  { t: ["Rəhbər eyni gündə komandanı, istehsalı, pulu və nəticəni görür.", "The director sees team, production, money and results the same day.", "Руководитель в тот же день видит команду, производство, деньги и результат."], tag: ["Nəticə", "Result", "Результат"], c: C.brand, i: "chart" },
 ];
 
 export function SlideFlow() {
@@ -893,16 +898,16 @@ export function SlideFlow() {
           "Каждый шаг опирается на данные предыдущего. Ничего не вводится дважды.",
         ])}
       />
-      <div className="grid grid-cols-4 gap-6 mt-12 flex-1 content-center n:grid-cols-1 n:gap-3 n:mt-6">
+      <div className="grid grid-cols-5 gap-4 mt-10 flex-1 content-center n:grid-cols-1 n:gap-3 n:mt-6">
         {STEPS.map((s, i) => {
           const on = i === active;
           const done = i < active;
           return (
-            <R key={i} d={0.3 + i * 0.07}>
+            <R key={i} d={0.25 + i * 0.05}>
               <motion.div
-                animate={{ y: on ? -6 : 0 }}
+                animate={{ y: on ? -5 : 0 }}
                 transition={{ duration: 0.5, ease: EASE }}
-                className="relative h-[262px] rounded-[24px] p-7 flex flex-col overflow-hidden surface n:h-auto n:p-4 n:flex-row n:items-center n:gap-4 n:rounded-[18px]"
+                className="relative h-[248px] rounded-[22px] p-5 flex flex-col overflow-hidden surface n:h-auto n:p-4 n:flex-row n:items-center n:gap-4 n:rounded-[18px]"
               >
                 <motion.div
                   className="absolute inset-0 rounded-[24px] pointer-events-none n:rounded-[18px]"
@@ -911,20 +916,20 @@ export function SlideFlow() {
                 />
                 <div className="relative flex items-center justify-between n:contents">
                   <span
-                    className="font-mono text-[42px] font-semibold leading-none transition-colors duration-500 n:text-[22px] n:w-8 n:shrink-0"
+                    className="font-mono text-[32px] font-semibold leading-none transition-colors duration-500 n:text-[22px] n:w-8 n:shrink-0"
                     style={{ color: on || done ? s.c : "rgb(var(--ink) / 0.2)" }}
                   >
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <span className="n:hidden" style={{ color: s.c, opacity: on ? 1 : 0.6 }}>
-                    <Icon name={s.i} size={30} />
+                    <Icon name={s.i} size={24} />
                   </span>
                 </div>
                 <div className="relative mt-auto n:mt-0">
-                  <div className="tx-cap mb-2.5 n:mb-1" style={{ color: s.c }}>
+                  <div className="tx-cap mb-2 n:mb-1" style={{ color: s.c }}>
                     {t(s.tag)}
                   </div>
-                  <div className="text-[21px] leading-[1.38] font-medium text-ink/85 n:text-[14px]">{t(s.t)}</div>
+                  <div className="text-[16px] leading-[1.35] font-medium text-ink/85 n:text-[14px]">{t(s.t)}</div>
                 </div>
                 <div className="absolute left-0 bottom-0 h-[3px] w-full bg-ink/[0.05]">
                   <motion.div className="h-full" style={{ background: s.c }} animate={{ width: on || done ? "100%" : "0%" }} transition={{ duration: on ? 1.5 : 0.3 }} />

@@ -534,6 +534,9 @@ const ICONS = {
   scale: ["M12 3v18M7 21h10M5 7h14M5 7l-3 7a3.5 3.5 0 0 0 6 0zM19 7l-3 7a3.5 3.5 0 0 0 6 0zM12 3l-2 2M12 3l2 2", "M2 14a3.5 3.5 0 0 0 6 0zM16 14a3.5 3.5 0 0 0 6 0z"],
   sunrise: ["M12 3v4M5.6 8.6l1.4 1.4M18.4 8.6L17 10M3 17h2M19 17h2M8 17a4 4 0 0 1 8 0M3 21h18", "M8 17a4 4 0 0 1 8 0z"],
   trend: ["M3 17l6-6 4 4 8-8M15 7h6v6", ""],
+  factory: ["M2 20V9l5 3V9l5 3V4h10v16zM14 10h2M14 14h2M18 10h2M18 14h2", "M12 20V12l-5-3V20z"],
+  percent: ["M19 5L5 19M7.5 8.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4zM16.5 19.5a2 2 0 1 0 0-4 2 2 0 0 0 0 4z", ""],
+  bank: ["M3 10h18M5 10v8M10 10v8M14 10v8M19 10v8M2 18h20M12 3l10 7H2z", "M12 3l10 7H2z"],
 } as const;
 
 export type IconName = keyof typeof ICONS;

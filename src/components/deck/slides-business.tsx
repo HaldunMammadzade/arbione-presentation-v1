@@ -61,9 +61,9 @@ export function SlideFinance() {
           </>
         }
         lead={t([
-          "Maaş, alış, satış və kassa ayrı proqramda yaşamır — hamısı eyni hesablar planına düşür.",
-          "Payroll, purchases, sales and cash don’t live in separate apps — all land in one chart of accounts.",
-          "Зарплата, закупки, продажи и касса не живут в разных программах — всё попадает в единый план счетов.",
+          "Maaş, alış, satış, istehsal mayası və kassa ayrı proqramda yaşamır — hamısı eyni hesablar planına düşür.",
+          "Payroll, purchases, sales, production cost and cash don’t live in separate apps — all land in one chart of accounts.",
+          "Зарплата, закупки, продажи, себестоимость и касса не живут в разных программах — всё в едином плане счетов.",
         ])}
         leadW={600}
       />
@@ -332,7 +332,7 @@ export function SlideSupply() {
           </R>
           <R d={0.4} className="flex justify-center">
             <div className="flex items-center gap-3 tx-sm text-ink/55">
-              <Icon name="arrow" size={18} className="rotate-90" /> {t(["Mal qəbul olunanda anbar onun yerini bilir", "On receipt, the warehouse knows where it is", "При приёмке склад знает, где лежит товар"])}
+              <Icon name="arrow" size={18} className="rotate-90" /> {t(["Mal qəbul olunanda anbar bilir; sex götürəndə qalıq azalır", "On receipt the warehouse knows; when the shop takes it, stock falls", "При приёмке склад знает; когда цех берёт — остаток падает"])}
             </div>
           </R>
           <R d={0.45}>
@@ -714,8 +714,9 @@ export function SlideDocuments() {
 const SOURCES: { t: Tx; i: IconName; c: string }[] = [
   { t: ["Satış", "Sales", "Продажи"], i: "tag", c: C.info },
   { t: ["Alış", "Purchasing", "Закупки"], i: "cart", c: C.info },
+  { t: ["İstehsalat", "Manufacturing", "Производство"], i: "factory", c: C.info },
   { t: ["Əməkhaqqı", "Payroll", "Зарплата"], i: "wallet", c: C.brand },
-  { t: ["Kassa və bank", "Cash & bank", "Касса и банк"], i: "coins", c: C.ok },
+  { t: ["Kassa · xəzinə", "Cash · treasury", "Касса · казначейство"], i: "bank", c: C.ok },
   { t: ["Anbar", "Warehouse", "Склад"], i: "box", c: C.info },
 ];
 
@@ -736,7 +737,7 @@ export function SlideReports() {
   const t = useT();
   const narrow = useNarrow();
   const H = 560;
-  const rowH = 88;
+  const rowH = 72;
   const gap = (H - SOURCES.length * rowH) / (SOURCES.length - 1);
   const ys = SOURCES.map((_, i) => i * (rowH + gap) + rowH / 2);
   const inPath = (y: number) => `M0 ${y} C 120 ${y}, 140 ${H / 2}, 240 ${H / 2}`;
@@ -747,13 +748,13 @@ export function SlideReports() {
     ["Mənfəət və zərər", "Profit & loss", "Прибыли и убытки"],
     ["İşçi və əməkhaqqı", "Employees & payroll", "Сотрудники и зарплата"],
     ["Anbar dövriyyəsi", "Stock turnover", "Оборот склада"],
+    ["İstehsal plan-fakt", "Production plan vs actual", "Производство план-факт"],
     ["Satış həcmi", "Sales volume", "Объём продаж"],
-    ["Alış və tərəfdaş", "Purchases & partners", "Закупки и партнёры"],
   ];
   const gov: Tx[] = [
     ["ƏDV", "VAT", "НДС"],
     ["Gəlir vergisi", "Income tax", "Подоходный"],
-    ["Sosial sığorta", "Social insurance", "Соцстрах"],
+    ["DSMF · İTS", "SSF · CHI", "ГФСС · ОМС"],
     ["Statistika", "Statistics", "Статистика"],
   ];
   const label = t(["Vahid jurnal", "Single journal", "Единый журнал"]);
@@ -1070,13 +1071,13 @@ export function SlideIntegrations() {
 /* =============================== 19 · A DAY =============================== */
 
 const DAY: { tm: string; r: Tx; a: Tx; i: IconName; c: string }[] = [
-  { tm: "09:00", r: ["Rəhbər", "Director", "Руководитель"], a: ["Panelə baxır: gözləyən təsdiqlər, kassa, açıq borc, anbar və satış.", "Checks the panel: pending approvals, cash, open debts, stock and sales.", "Смотрит панель: согласования, касса, долги, склад и продажи."], i: "eye", c: C.warn },
+  { tm: "09:00", r: ["Rəhbər", "Director", "Руководитель"], a: ["Panelə baxır: təsdiqlər, kassa, borc, anbar, istehsal və satış.", "Checks the panel: approvals, cash, debts, stock, production and sales.", "Смотрит панель: согласования, касса, долги, склад, производство и продажи."], i: "eye", c: C.warn },
   { tm: "09:20", r: ["İşçi", "Employee", "Сотрудник"], a: ["Elanı oxuyur, məzuniyyət sorğusu göndərir, tapşırığını yeniləyir.", "Reads the news, requests leave, updates a task.", "Читает объявление, подаёт заявку на отпуск, обновляет задачу."], i: "user", c: C.info },
   { tm: "10:00", r: ["Menecer", "Manager", "Менеджер"], a: ["Sorğunu təsdiqləyir, iş vaxtına baxır, sahədəki işçini yoxlayır.", "Approves the request, checks hours, sees who is in the field.", "Согласует заявку, проверяет время и сотрудников в поле."], i: "users", c: C.brand },
   { tm: "11:30", r: ["İşçi şöbəsi", "Employee team", "Отдел сотрудников"], a: ["Müqaviləni və əmri bağlayır.", "Closes the contract and the order.", "Оформляет договор и приказ."], i: "id", c: C.brand },
   { tm: "13:00", r: ["Mühasib", "Accountant", "Бухгалтер"], a: ["Maaş dövrünü, jurnalı və bank uzlaşmasını görür.", "Reviews payroll, the journal and bank reconciliation.", "Видит расчёт зарплаты, журнал и сверку с банком."], i: "landmark", c: C.ok },
-  { tm: "14:30", r: ["Satınalma", "Purchasing", "Закупки"], a: ["Təchizatçı təkliflərini müqayisə edir.", "Compares supplier offers.", "Сравнивает предложения поставщиков."], i: "cart", c: C.info },
-  { tm: "15:30", r: ["Anbar", "Warehouse", "Склад"], a: ["Malın gəldiyini qeyd edir.", "Records that goods have arrived.", "Отмечает поступление товара."], i: "box", c: C.info },
+  { tm: "13:40", r: ["Xəzinədar", "Treasurer", "Казначей"], a: ["Ödəniş paketini hazırlayır və təsdiqə göndərir.", "Prepares the payment pack and sends it for approval.", "Готовит пакет платежей и отправляет на согласование."], i: "bank", c: C.ok },
+  { tm: "15:30", r: ["Sex", "Shop floor", "Цех"], a: ["İş əmrini icra edir, hazır məhsulu qəbul edir.", "Runs the work order and receives finished goods.", "Выполняет наряд и принимает готовую продукцию."], i: "factory", c: C.info },
   { tm: "17:00", r: ["Satış", "Sales", "Продажи"], a: ["Fakturanı və ödənişi bağlayır.", "Closes the invoice and payment.", "Закрывает счёт и оплату."], i: "tag", c: C.ok },
 ];
 
@@ -1187,9 +1188,9 @@ export function SlideGains() {
       c: C.warn,
     },
     {
-      t: ["Sahə və ofis bir yerdə", "Field and office together", "Поле и офис вместе"],
-      d: ["Ofisdəki iş vaxtı ilə sahədəki marşrut eyni sistemdədir.", "Office hours and field routes live in one system.", "Рабочее время в офисе и маршруты в поле — в одной системе."],
-      i: "route",
+      t: ["İstehsalın izi", "The production trail", "След производства"],
+      d: ["Reseptdən iş əmrinə, material sərfindən hazır məhsula və keyfiyyət yoxlamasına qədər zəncir qırılmır.", "From recipe to work order, material issue to finished goods and QA — the chain never breaks.", "От рецепта до наряда, от списания материала до готовой продукции и ОТК — цепочка не рвётся."],
+      i: "factory",
       c: C.info,
     },
     {
@@ -1204,8 +1205,8 @@ export function SlideGains() {
     ["Bank", "Bank", "Банк"],
     ["Alış fakturası", "Purchase invoice", "Счёт поставщика"],
     ["Anbar", "Warehouse", "Склад"],
-    ["Satış", "Sale", "Продажа"],
-    ["Müştəri borcu", "Client debt", "Долг клиента"],
+    ["İstehsal mayası", "Production cost", "Себестоимость"],
+    ["Satış · borc", "Sale · debt", "Продажа · долг"],
   ];
   return (
     <Slide>
@@ -1231,9 +1232,9 @@ export function SlideGains() {
             </div>
             <p className="mt-5 text-[21px] leading-[1.5] text-white/85 max-w-[680px] n:text-[14px] n:mt-3">
               {t([
-                "Məzuniyyət, əmr, alış və satış sənədi kağız və ya mesajla dolaşmır. Status hər an görünür.",
-                "Leave requests, orders, purchase and sales documents no longer travel on paper or in chats. The status is always visible.",
-                "Заявки, приказы, документы закупок и продаж больше не ходят на бумаге и в чатах. Статус виден всегда.",
+                "Məzuniyyət, əmr, alış, satış və istehsal sənədi kağız və ya mesajla dolaşmır. Status hər an görünür.",
+                "Leave, orders, purchase, sales and production documents no longer travel on paper or in chats. Status is always visible.",
+                "Отпуска, приказы, закупки, продажи и производство больше не ходят на бумаге и в чатах. Статус виден всегда.",
               ])}
             </p>
             <div className="mt-auto pt-6">

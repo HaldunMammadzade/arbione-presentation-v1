@@ -36,9 +36,9 @@ const GROUPS: { name: Tx; color: string; icon: IconName; items: Mod[] }[] = [
     icon: "layout",
     items: [
       { n: "01", t: ["Başlanğıc", "Start", "Старт"], d: ["Rəhbər paneli, işçi və menecer kabineti", "Director panel, employee & manager cabinets", "Панель руководителя, кабинеты сотрудника и менеджера"], i: "layout" },
-      { n: "15", t: ["Sənədlər və təsdiqlər", "Documents & approvals", "Документы и согласования"], d: ["Əmr, imza zənciri, şablon, elan", "Orders, signing chain, templates, news", "Приказы, подписи, шаблоны, объявления"], i: "sign" },
-      { n: "16", t: ["Hesabatlar və uyğunluq", "Reports & compliance", "Отчёты и соответствие"], d: ["Maliyyə, işçi, anbar, vergi", "Finance, employees, stock, tax", "Финансы, сотрудники, склад, налоги"], i: "report" },
-      { n: "17", t: ["İnteqrasiyalar və icazələr", "Integrations & access", "Интеграции и доступ"], d: ["1C, e-qaimə, bank-client, rollar", "1C, e-invoice, bank-client, roles", "1С, э-накладные, банк-клиент, роли"], i: "plug" },
+      { n: "18", t: ["Sənədlər və təsdiqlər", "Documents & approvals", "Документы и согласования"], d: ["Əmr, imza zənciri, şablon, elan", "Orders, signing chain, templates, news", "Приказы, подписи, шаблоны, объявления"], i: "sign" },
+      { n: "19", t: ["Hesabatlar və BI", "Reports & BI", "Отчёты и BI"], d: ["Maliyyə, işçi, anbar, istehsal, vergi", "Finance, employees, stock, production, tax", "Финансы, сотрудники, склад, производство, налоги"], i: "report" },
+      { n: "20", t: ["Platforma və icazələr", "Platform & access", "Платформа и доступ"], d: ["1C, e-qaimə, bank-client, rollar", "1C, e-invoice, bank-client, roles", "1С, э-накладные, банк-клиент, роли"], i: "plug" },
     ],
   },
   {
@@ -69,21 +69,24 @@ const GROUPS: { name: Tx; color: string; icon: IconName; items: Mod[] }[] = [
           ["Kassa və bank", "Cash & bank", "Касса и банк"],
           ["Mühasibatlıq", "Accounting", "Бухгалтерия"],
           ["Debitor və kreditor", "Receivables & payables", "Дебиторы и кредиторы"],
-          ["Əsas vəsaitlər", "Fixed assets", "Основные средства"],
+          ["Büdcə və əsas vəsait", "Budget & fixed assets", "Бюджет и ОС"],
           ["Maliyyə sazlamaları", "Finance settings", "Финансовые настройки"],
         ],
       },
+      { n: "11", t: ["Xəzinədarlıq", "Treasury", "Казначейство"], d: ["Ödəniş paketi, likvidlik, valyuta", "Payment packs, liquidity, FX", "Пакеты платежей, ликвидность, валюта"], i: "bank" },
+      { n: "12", t: ["Vergi və uyğunluq", "Tax & compliance", "Налоги и соответствие"], d: ["ƏDV, gəlir, DSMF, təqvim", "VAT, income, SSF, calendar", "НДС, подоходный, ГФСС, календарь"], i: "percent" },
     ],
   },
   {
-    name: ["Mal və müştəri", "Goods & clients", "Товары и клиенты"],
+    name: ["Mal və istehsal", "Goods & production", "Товары и производство"],
     color: C.info,
-    icon: "box",
+    icon: "factory",
     items: [
-      { n: "11", t: ["Satınalma", "Purchasing", "Закупки"], d: ["Tələb, təklif, sifariş, qəbul", "Requests, quotes, orders, receiving", "Заявки, предложения, заказы, приёмка"], i: "cart" },
-      { n: "12", t: ["Anbar", "Warehouse", "Склад"], d: ["Stok, hərəkət, sayım, köçürmə", "Stock, movements, counts, transfers", "Остатки, движения, инвентаризация"], i: "box" },
-      { n: "13", t: ["Satış", "Sales", "Продажи"], d: ["Təklif, sifariş, faktura, ödəniş", "Quotes, orders, invoices, payments", "Предложения, заказы, счета, оплаты"], i: "tag" },
-      { n: "14", t: ["Müştərilər", "Clients (CRM)", "Клиенты (CRM)"], d: ["Huni, fəaliyyət, proqnoz, layihə", "Pipeline, activities, forecast, projects", "Воронка, активности, прогноз, проекты"], i: "handshake" },
+      { n: "13", t: ["Satınalma", "Purchasing", "Закупки"], d: ["Tələb, təklif, sifariş, qəbul", "Requests, quotes, orders, receiving", "Заявки, предложения, заказы, приёмка"], i: "cart" },
+      { n: "14", t: ["Anbar", "Warehouse", "Склад"], d: ["Stok, hərəkət, sayım, köçürmə", "Stock, movements, counts, transfers", "Остатки, движения, инвентаризация"], i: "box" },
+      { n: "15", t: ["İstehsalat", "Manufacturing", "Производство"], d: ["Resept, iş əmri, maya, keyfiyyət", "BOM, work order, costing, QA", "Рецепт, наряд, себестоимость, ОТК"], i: "factory" },
+      { n: "16", t: ["Satış", "Sales", "Продажи"], d: ["Təklif, sifariş, faktura, ödəniş", "Quotes, orders, invoices, payments", "Предложения, заказы, счета, оплаты"], i: "tag" },
+      { n: "17", t: ["Müştərilər", "Clients (CRM)", "Клиенты (CRM)"], d: ["Huni, fəaliyyət, proqnoz, layihə", "Pipeline, activities, forecast, projects", "Воронка, активности, прогноз, проекты"], i: "handshake" },
     ],
   },
 ];
@@ -97,7 +100,7 @@ export function SlideModules() {
         eyebrow={t(["Modullar", "Modules", "Модули"])}
         title={
           <>
-            {t(["17 modul. ", "17 modules. ", "17 модулей. "])}
+            {t(["20 modul. ", "20 modules. ", "20 модулей. "])}
             <Hl>{t(["Bir ekosistem.", "One ecosystem.", "Одна экосистема."])}</Hl>
           </>
         }
@@ -497,6 +500,7 @@ export function SlideStructure() {
                     ["Məzuniyyət", "Leave", "Отпуска"],
                     ["Maaş", "Payroll", "Зарплата"],
                     ["GPS", "GPS", "GPS"],
+                    ["İstehsalat", "Production", "Производство"],
                     ["Hesabat", "Reports", "Отчёты"],
                   ] as Tx[]
                 ).map((x, k) => (
